@@ -19,7 +19,7 @@
                 <h1>shyam</h1>
                 <ul id="side_menu" class="nav flex-column nav-pills">
                     <li class="nav-item">
-                        <a class="nav-link active" href="dashboard.php">
+                        <a class="nav-link" href="dashboard.php">
                         <i class="fa fa-tachometer" aria-hidden="true"></i>
                         &nbsp;Dashboard
                         </a>
@@ -31,7 +31,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="categories.php">
+                        <a class="nav-link active" href="categories.php">
                         <i class="fa fa-tags" aria-hidden="true"></i>
                         &nbsp;Categories
                     </a>
