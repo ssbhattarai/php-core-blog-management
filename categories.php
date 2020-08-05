@@ -1,3 +1,23 @@
+<?php  require_once("include/database.php")?>
+<?php  require_once("include/functions.php")?>
+
+<?php 
+    $categoryErr = "";
+    if (isset($_POST["submit"])){
+        $category = $_POST["category"]; 
+        date_default_timezone_get();
+        $current_time = time();
+        $datetime = strftime("%B-%d-%Y %H:%M:%S");
+        if(empty($category)){
+            $categoryErr = "All FIled must be filled out";
+        }else {
+         redirect("dashboard.php");
+        }
+    }
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -62,95 +82,27 @@
                     </ul>
             </div> <!-- ending of side area-->
                 <div class="col-sm-10">
-                    <h1>Admin Dashboard </h1>
-                    <p>
-                        this is dummy test for test of the
-                        this is dummy test for test of the
-                        this is dummy test for test of the
-                        this is dummy test for test of the
-                        this is dummy test for test of the
-                        this is dummy test for test of the
-                        this is dummy test for test of the
-                        this is dummy test for test of thethis is dummy test for test of the
-                        this is dummy test for test of the
-                        this is dummy test for test of the
-                        this is dummy test for test of thethis is dummy test for test of the
-                        this is dummy test for test of the
-                        this is dummy test for test of the
-                        this is dummy test for test of thethis is dummy test for test of the
-                        this is dummy test for test of the
-                        this is dummy test for test of the
-                        this is dummy test for test of thethis is dummy test for test of the
-                        this is dummy test for test of the
-                        this is dummy test for test of the
-                        this is dummy test for test of thethis is dummy test for test of the
-                        this is dummy test for test of the
-                        this is dummy test for test of the
-                        this is dummy test for test of thethis is dummy test for test of the
-                        this is dummy test for test of the
-                        this is dummy test for test of the
-                        this is dummy test for test of thethis is dummy test for test of the
-                        this is dummy test for test of the
-                        this is dummy test for test of the
-                        this is dummy test for test of the
-
-                        this is dummy test for test of the
-                        this is dummy test for test of the
-                        this is dummy test for test of the
-                        this is dummy test for test of the
-                        this is dummy test for test of the
-                        this is dummy test for test of the
-                        this is dummy test for test of thethis is dummy test for test of the
-                        this is dummy test for test of the
-                        this is dummy test for test of the
-                        this is dummy test for test of thethis is dummy test for test of the
-                        this is dummy test for test of the
-                        this is dummy test for test of the
-                        this is dummy test for test of thethis is dummy test for test of the
-                        this is dummy test for test of the
-                        this is dummy test for test of the
-                        this is dummy test for test of thethis is dummy test for test of the
-                        this is dummy test for test of the
-                        this is dummy test for test of the
-                        this is dummy test for test of thethis is dummy test for test of the
-                        this is dummy test for test of the
-                        this is dummy test for test of the
-                        this is dummy test for test of thethis is dummy test for test of the
-                        this is dummy test for test of the
-                        this is dummy test for test of the
-                        this is dummy test for test of thethis is dummy test for test of the
-                        this is dummy test for test of the
-                        this is dummy test for test of the
-                        this is dummy test for test of the
-                        this is dummy test for test of the
-                        this is dummy test for test of the
-                        this is dummy test for test of the
-                        this is dummy test for test of the
-                        this is dummy test for test of the
-                        this is dummy test for test of the
-                        this is dummy test for test of thethis is dummy test for test of the
-                        this is dummy test for test of the
-                        this is dummy test for test of the
-                        this is dummy test for test of thethis is dummy test for test of the
-                        this is dummy test for test of the
-                        this is dummy test for test of the
-                        this is dummy test for test of thethis is dummy test for test of the
-                        this is dummy test for test of the
-                        this is dummy test for test of the
-                        this is dummy test for test of thethis is dummy test for test of the
-                        this is dummy test for test of the
-                        this is dummy test for test of the
-                        this is dummy test for test of thethis is dummy test for test of the
-                        this is dummy test for test of the
-                        this is dummy test for test of the
-                        this is dummy test for test of thethis is dummy test for test of the
-                        this is dummy test for test of the
-                        this is dummy test for test of the
-                        this is dummy test for test of thethis is dummy test for test of the
-                        this is dummy test for test of the
-                        this is dummy test for test of the
-                        this is dummy test for test of therm 
-                    </p>
+                    <h1>Manage Category </h1>
+                   <?php if($categoryErr){ ?>
+                       <div class="alert alert-danger" role="alert">
+                          <?php echo $categoryErr; ?>
+                         </div>
+                   <?php  } ?> 
+                    <form action="categories.php" method="post">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Category Name</label>
+                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="category" autofocus>
+                        </div>
+                        <!-- <div class="form-group">
+                            <label for="exampleInputPassword1">Created Date</label>
+                            <input type="text" class="form-control" id="exampleInputPassword1" name="datetime">
+                        </div> -->
+                        <!-- <div class="form-group form-check">
+                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                            <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                        </div> -->
+                        <button type="submit" class="btn btn-success btn-lg" name="submit">Submit</button>
+                        </form>
             </div> <!-- ending of side area-->
         </div> <!-- ending  of row-->
    </div> <!-- ennd containger-->

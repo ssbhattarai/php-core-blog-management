@@ -47,5 +47,7 @@ body {
     color: turquoise;
 }
 
-
+.error {
+    color: red;
+}
 
