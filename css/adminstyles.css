@@ -1,0 +1,40 @@
+body {
+    background-color:#2f4050;
+}
+
+.col-sm-10 {
+    background-color: white;
+}
+
+
+#side_menu a{
+    columns: #9fb1c2; ;
+}
+
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    color: #fff;
+    font-weight: bold;
+    background-color: #2f5d8d;
+}
+
+#side_menu a:hover {
+    color: white;
+    background-color: turquoise;
+    font-weight: bold;
+    display: block;
+}
+
+
+#footer p {
+    text-align: center;
+    color: white;
+}
+
+#footer p a {
+    color: rgb(82, 151, 230);
+}
+
+#footer p a:hover {
+    color: turquoise;
+}
