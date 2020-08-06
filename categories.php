@@ -3,15 +3,34 @@
 
 <?php 
     $categoryErr = "";
+    $categorySucc = "";
     if (isset($_POST["submit"])){
+
         $category = $_POST["category"]; 
+
+        // DateTimeZone('Asia/Katmandu');
         date_default_timezone_get();
         $current_time = time();
         $datetime = strftime("%B-%d-%Y %H:%M:%S");
-        if(empty($category)){
-            $categoryErr = "All FIled must be filled out";
+        $admin = "SHyam";
+
+        
+        if(empty($category)) {
+            $categoryErr = "All Field must be filled out";
+        } elseif(strlen($category) > 1000) {
+            $categoryErr = "Category Name is Too long";
         }else {
-         redirect("dashboard.php");
+            
+        global $connection;
+         $sql = "INSERT INTO category(category_name,datetime,creatername)
+                    VALUES('$category','$datetime','$admin')";
+                    
+        if (mysqli_query($connection, $sql)) {
+            $categorySucc = "New Category Added Successfully!!";
+         } else {
+            echo "Error: " . $sql . "" . mysqli_error($connection);
+         }
+        //  $con->close();
         }
     }
 
@@ -86,6 +105,11 @@
                    <?php if($categoryErr){ ?>
                        <div class="alert alert-danger" role="alert">
                           <?php echo $categoryErr; ?>
+                         </div>
+                   <?php  } ?> 
+                   <?php if($categorySucc){ ?>
+                       <div class="alert alert-success" role="alert">
+                          <?php echo $categorySucc; ?>
                          </div>
                    <?php  } ?> 
                     <form action="categories.php" method="post">
