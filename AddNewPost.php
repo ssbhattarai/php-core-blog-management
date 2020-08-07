@@ -40,21 +40,23 @@
         if( in_array($imageFileType,$extensions_arr) ){
             // Insert record
             $image_base64 = base64_encode(file_get_contents($_FILES['Image']['tmp_name']) );     // Convert to base64 
-
             $image = 'data:image/'.$imageFileType.';base64,'.$image_base64;
-
-            $sql = "INSERT INTO blog(datetime,title,category,author,image,post_body)
-                    VALUES('$datetime','$title','$category','$author','$image','$post_body')";
             
-            if (mysqli_query($connection, $sql)) {
-                move_uploaded_file($_FILES['Image']['tmp_name'],$target_dir.$image_name);
-                $postSucc = "New Post Added Successfully!!";
+            if (move_uploaded_file($_FILES['Image']['tmp_name'], $target_file)) {
+
+                $sql = "INSERT INTO blog(datetime,title,category,author,image,post_body)
+                        VALUES('$datetime','$title','$category','$author','$image','$post_body')";
                 
-                redirect("AddNewPost.php");
-            } else {
-                echo "Error: " . $sql . "" . mysqli_error($connection);
-            }
-            //  $con->close();
+                if (mysqli_query($connection, $sql)) {
+                    
+                    $postSucc = "New Post Added Successfully!!";
+                    
+                    redirect("AddNewPost.php");
+                } else {
+                    echo "Error: " . $sql . "" . mysqli_error($connection);
+                }
+                //  $con->close();
+                }
             }
          }
     }
