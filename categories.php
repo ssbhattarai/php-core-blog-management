@@ -119,7 +119,7 @@
                 <?php  } ?>
                 <form action="categories.php" method="post">
                     <div class="form-group">
-                        <label for="exampleInputEmail1" style="color: #61ce4d; font-weight: bold; font-family: cursive;">Category Name</label>
+                        <label for="exampleInputEmail1" class="form-name">Category Name</label>
                         <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="category">
                     </div>
                     <button type="submit" class="btn btn-success btn-lg" name="submit">Add Category</button>

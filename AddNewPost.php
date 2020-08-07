@@ -2,41 +2,69 @@
 <?php  require_once("include/functions.php")?>
 
 <?php 
-    $categoryErr = "";
-    $categorySucc = "";
+    $postErr = "";
+    $postSucc = "";
     if (isset($_POST["submit"])){
 
+        // To get form data
+        $title = $_POST["title"]; 
         $category = $_POST["category"]; 
+        $post_body = $_POST["post_body"]; 
 
-        // DateTimeZone('Asia/Katmandu');
+        // for Created Date time
         date_default_timezone_get();
         $current_time = time();
         $datetime = strftime("%B-%d-%Y %H:%M:%S");
-        $admin = "SHyam";
-
+        $author = "Shyam";
         
-        if(empty($category)) {
-            $categoryErr = "All Field must be filled out";
-        } elseif(strlen($category) > 1000) {
-            $categoryErr = "Category Name is Too long";
+
+        //Image Upload 
+        $image_name = $_FILES['Image']['name'];
+        $target_dir = "images/";
+        $target_file = $target_dir . basename($_FILES["Image"]["name"]);
+
+        // Select file type
+        $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+
+        // Valid file extensions
+        $extensions_arr = array("jpg","jpeg","png","gif");
+        
+        if(empty($title)) {
+            $postErr = "All Field must be filled out";
+        // }
+        //  elseif(strlen($title) > 1000) {
+        //     $postErr = "Category Name is Too long";
         }else {
             
         global $connection;
-         $sql = "INSERT INTO category(category_name,datetime,creatorname)
-                    VALUES('$category','$datetime','$admin')";
-                    
-        if (mysqli_query($connection, $sql)) {
-            $categorySucc = "New Category Added Successfully!!";
-            redirect("categories.php");
-         } else {
-            echo "Error: " . $sql . "" . mysqli_error($connection);
+        if( in_array($imageFileType,$extensions_arr) ){
+            // Insert record
+            $image_base64 = base64_encode(file_get_contents($_FILES['Image']['tmp_name']) );     // Convert to base64 
+
+            $image = 'data:image/'.$imageFileType.';base64,'.$image_base64;
+
+            $sql = "INSERT INTO blog(datetime,title,category,author,image,post_body)
+                    VALUES('$datetime','$title','$category','$author','$image','$post_body')";
+            
+            if (mysqli_query($connection, $sql)) {
+                move_uploaded_file($_FILES['Image']['tmp_name'],$target_dir.$image_name);
+                $postSucc = "New Post Added Successfully!!";
+                
+                redirect("AddNewPost.php");
+            } else {
+                echo "Error: " . $sql . "" . mysqli_error($connection);
+            }
+            //  $con->close();
+            }
          }
-        //  $con->close();
-        }
     }
 
 
+    
+
+
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -107,24 +135,48 @@
             </div> <!-- ending of side area-->
             <div class="col-sm-10">
                 <h1>Add New Post </h1>
-                <?php if($categoryErr){ ?>
+                <?php if($postErr){ ?>
                 <div class="alert alert-danger" role="alert">
-                    <?php echo $categoryErr; ?>
+                    <?php echo $postErr; ?>
                 </div>
                 <?php  } ?>
-                <?php if($categorySucc){ ?>
+                <?php if($postSucc){ ?>
                 <div class="alert alert-success" role="alert">
-                    <?php echo $categorySucc; ?>
+                    <?php echo $postSucc; ?>
                 </div>
                 <?php  } ?>
-                <form action="categories.php" method="post">
+                <form action="AddNewPost.php" method="post" enctype="multipart/form-data">
                     <div class="form-group">
-                        <label for="exampleInputEmail1" style="color: #61ce4d; font-weight: bold; font-family: cursive;">Category Name</label>
-                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="category">
+                        <label for="title" class="form-name">Title</label>
+                        <input type="text" class="form-control" id="title" aria-describedby="emailHelp" name="title">
+                    </div>
+                    <div class="form-group">
+                        <label for="category" class="form-name">Select Category</label>
+                        <select class="form-control" id="category" name="category">
+                            <option> Select a category for this post </option>
+                            <?php 
+                            $sql = "SELECT * FROM category ORDER BY datetime DESC";
+                            $res_data = $connection->query($sql);
+                                if($res_data->num_rows > 0) {
+                                    while($row = $res_data->fetch_assoc()) {
+                                        $cateogyName = $row['category_name'];
+                                        ?>
+                                        <option> <?php echo "$cateogyName"; ?>  </option>
+                        <?php }}else {
+                         echo "Please Create the Category to create a new Post";
+                        } ?> 
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="image" class="form-name">Image</label>
+                        <input type="file" class="form-control-file" id="image" name="Image">
+                    </div>
+                    <div class="form-group">
+                        <label for="post" class="form-name">Post</label>
+                        <textarea class="form-control" id="post" rows="3" name="post_body"></textarea>
                     </div>
                     <button type="submit" class="btn btn-success btn-lg" name="submit">Add New Post</button>
                 </form>
-                </div>
             </div> <!-- ending of side area-->
         </div> <!-- ending  of row-->
     </div> <!-- ennd containger-->
