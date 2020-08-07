@@ -48,6 +48,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/adminstyles.css">
+    <link href="https://fonts.googleapis.com/css2?family=B612&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>ADMIN</title>
     <style>
@@ -67,7 +68,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="AddNewPost.php">
                             <i class="fa fa-list" aria-hidden="true"></i>
                             &nbsp;Add New post
                         </a>
@@ -118,13 +119,14 @@
                 <?php  } ?>
                 <form action="categories.php" method="post">
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Category Name</label>
+                        <label for="exampleInputEmail1" style="color: #61ce4d; font-weight: bold; font-family: cursive;">Category Name</label>
                         <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="category">
                     </div>
-                    <button type="submit" class="btn btn-success btn-lg" name="submit">Submit</button>
+                    <button type="submit" class="btn btn-success btn-lg" name="submit">Add Category</button>
                 </form>
-                <div style="margin-top: 26px;">
-                    <h4> Category Table </h4>
+                <h4 style="margin-top: 20px;text-align:center; font-weight:bold;" > Category Table </h4>
+                <div style="margin-top: 26px;" class="table-responsive">
+                    
                     <?php 
                         // Pagination
                         if (isset($_GET['page_no']) && $_GET['page_no']!="") {
@@ -158,7 +160,7 @@
                        
                     ?>
              <?php if(!$dataErr) { ?>
-                    <table class="table">
+                    <table class="table table-striped">
                         <thead class="thead-dark">
                             <tr>
                                 <th scope="col">Id</th>

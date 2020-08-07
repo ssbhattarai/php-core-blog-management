@@ -25,7 +25,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="AddNewPost.php">
                         <i class="fa fa-list" aria-hidden="true"></i>
                         &nbsp;Add New post
                         </a>
