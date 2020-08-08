@@ -1,3 +1,6 @@
+<?php include_once('include/database.php');?>
+<?php include_once('include/functions.php');?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -46,15 +49,31 @@
     <p>Made by Sundar</p>
     <div class="row">
     <div class="col-sm-8">
-        <h2>THis is post Title</h2>
-        <p>
-        I inadvertently went to See's Candy last week (I was in the mall looking for phone repair), 
-        and as it turns out, See's Candy now charges a dollar -- a full dollar -- for even the simplest 
-        of their wee confection offerings. I bought two chocolate lollipops and two chocolate-caramel-almond things. 
-        The total cost was four-something. I mean, the candies were tasty and all, but let's be real: A Snickers bar
-         is fifty cents. After this dollar-per-candy revelation,
-         I may not find myself wandering dreamily back into a See's Candy any time soon.
-        </p>
+    <?php 
+            global $connection;
+            $sql = "SELECT * FROM blog ORDER BY datetime DESC";
+            $all_data = $connection->query($sql);
+            if($all_data->num_rows > 0) {
+                while($row = $all_data->fetch_assoc()) {
+                    // echo print_r($row);
+                    // $image = base64_decode($row['image']);
+                    // echo $image;
+                    $image = $row['image'];
+            ?> 
+    <div class="card">
+        <img src="<?= $image ?>" class="card-img-top img-thumbnail rounded float-left" alt="..." >
+        <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+        </div>
+        <?php
+            }
+            } else {
+                $dataErr = "No data To display";
+            }
+            ?>
     </div>
     <div class="col-offset-sm-1 col-sm-3">
     <h2>THis is post Title</h2>

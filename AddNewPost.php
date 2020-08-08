@@ -175,7 +175,7 @@
                     </div>
                     <div class="form-group">
                         <label for="post" class="form-name">Post</label>
-                        <textarea class="form-control" id="post" rows="3" name="post_body"></textarea>
+                        <textarea class="form-control" id="post"  name="post_body"></textarea>
                     </div>
                     <button type="submit" class="btn btn-success btn-lg" name="submit">Add New Post</button>
                 </form>
