@@ -7,3 +7,26 @@
     font-family:Verdana !important;
     font-weight: bold;
  }
+
+
+ #footer {
+     position: relative;
+    padding: 10px;
+    background-color: darkslategray;
+}
+
+
+#footer p {
+    text-align: center;
+    color: white;
+}
+
+#footer p a {
+    color: rgb(82, 151, 230);
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#footer p a:hover {
+    color: turquoise;
+}

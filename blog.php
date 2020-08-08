@@ -41,14 +41,39 @@
   </div>
 </nav>
 <div style="height:10px;background: #227b5a;"></div>
-
-
-
-
-
-
-
-
-
+<div class="container">
+    <h1>Full PHP BLOG CMS </h1>
+    <p>Made by Sundar</p>
+    <div class="row">
+    <div class="col-sm-8">
+        <h2>THis is post Title</h2>
+        <p>
+        I inadvertently went to See's Candy last week (I was in the mall looking for phone repair), 
+        and as it turns out, See's Candy now charges a dollar -- a full dollar -- for even the simplest 
+        of their wee confection offerings. I bought two chocolate lollipops and two chocolate-caramel-almond things. 
+        The total cost was four-something. I mean, the candies were tasty and all, but let's be real: A Snickers bar
+         is fifty cents. After this dollar-per-candy revelation,
+         I may not find myself wandering dreamily back into a See's Candy any time soon.
+        </p>
+    </div>
+    <div class="col-offset-sm-1 col-sm-3">
+    <h2>THis is post Title</h2>
+        <p>
+        I inadvertently went to See's Candy last week (I was in the mall looking for phone repair), 
+        and as it turns out, See's Candy now charges a dollar -- a full dollar -- for even the simplest 
+        of their wee confection offerings. I bought two chocolate lollipops and two chocolate-caramel-almond things. 
+        The total cost was four-something. I mean, the candies were tasty and all, but let's be real: A Snickers bar
+         is fifty cents. After this dollar-per-candy revelation,
+         I may not find myself wandering dreamily back into a See's Candy any time soon.
+        </p>
+    </div>
+  </div>
+</div>
+<div id="footer"> <!-- Footer div -->
+        <hr>
+            <p> | &copy; | 2020 <a href="https://sambhattarai.com.np" target="_blank">SAMBHATTARAI</a> All Right Reserved</p>
+        <hr>
+   </div>
+   <div style="height:10px; background-color: #283b5f"></div>
 </body>
 </html>
