@@ -88,15 +88,22 @@
             ?>
     </div>
     <div class="offset-sm-1 col-sm-3">
-    <h2>THis is post Title</h2>
-        <p>
-        I inadvertently went to See's Candy last week (I was in the mall looking for phone repair), 
-        and as it turns out, See's Candy now charges a dollar -- a full dollar -- for even the simplest 
-        of their wee confection offerings. I bought two chocolate lollipops and two chocolate-caramel-almond things. 
-        The total cost was four-something. I mean, the candies were tasty and all, but let's be real: A Snickers bar
-         is fifty cents. After this dollar-per-candy revelation,
-         I may not find myself wandering dreamily back into a See's Candy any time soon.
-        </p>
+    <h2 style="text-align:center;">Categories</h2>
+    <ul class="list-group">
+       <?php 
+       $sql = "SELECT category_name FROM category ORDER BY datetime DESC";
+       $res_data = $connection->query($sql);
+           if($res_data->num_rows > 0) {
+               while($row = $res_data->fetch_assoc()) {
+                   $cateogyName = $row['category_name']; ?>
+            
+            <li class="list-group-item"><?php echo $cateogyName; ?></li>
+            <?php 
+                }} else {
+                echo "no Category to show";
+            }
+                   ?>
+        </ul>
     </div>
   </div>
 </div>
