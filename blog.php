@@ -33,6 +33,12 @@
         <a class="nav-link" href="blog.php">Blog</a>
       </li>
       <li class="nav-item">
+        <a class="nav-link" href="#">About</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Contact</a>
+      </li>
+      <li class="nav-item">
         <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
       </li>
     </ul>
@@ -60,22 +66,28 @@
                     // echo $image;
                     $image = $row['image'];
             ?> 
-    <div class="card">
+    <div class="card shadow p-3 mb-5 bg-dark text-light rounded">
         <img src="<?= $image ?>" class="card-img-top img-thumbnail rounded float-left" alt="..." >
         <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
+            <h5 class="card-title"><?php echo htmlentities($row['title']) ?></h5>
+            <small class="float-sm-left">Category: <?php echo htmlentities($row["category"])?> </small>
+            <small style="margin-left: 10px">Published on: <?php echo htmlentities($row["datetime"])?></small>
+            <p class="card-text">
+                <?php if(strlen($row['post_body']) > 150){
+                    $post = substr($row["post_body"], 0, 150) . '...';
+                }
+                echo htmlentities($post); ?></p>
+            <a href="#" class="btn btn-primary">View More</a>
         </div>
         </div>
         <?php
             }
             } else {
-                $dataErr = "No data To display";
+                echo  "No Post To display";
             }
             ?>
     </div>
-    <div class="col-offset-sm-1 col-sm-3">
+    <div class="offset-sm-1 col-sm-3">
     <h2>THis is post Title</h2>
         <p>
         I inadvertently went to See's Candy last week (I was in the mall looking for phone repair), 
