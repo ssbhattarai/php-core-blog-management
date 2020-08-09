@@ -77,7 +77,7 @@
                     $post = substr($row["post_body"], 0, 150) . '...';
                 }
                 echo htmlentities($post); ?></p>
-            <a href="#" class="btn btn-primary">View More</a>
+            <a href="FullPost.php?id=<?php echo $row["id"] ?>" class="btn btn-success">View More &rsaquo;&rsaquo;</a>
         </div>
         </div>
         <?php
