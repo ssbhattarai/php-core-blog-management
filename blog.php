@@ -62,7 +62,7 @@
         <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
       </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0" action="" method="GET">
+    <form class="form-inline my-2 my-lg-0" action="blog.php" method="GET">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit" name="postsearch">Search</button>
     </form>
@@ -80,7 +80,10 @@
        <?php  echo $searchresult; ?>
     </div>
    <?php   } ?>
-    <?php
+    <?php   
+            if(mysqli_num_rows($result) <= 0){
+                $searchresult = "NO Post To Show";
+            }
             while($row = $result->fetch_assoc()){
                 $image= $row["image"];
     
