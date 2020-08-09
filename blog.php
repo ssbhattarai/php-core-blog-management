@@ -1,5 +1,25 @@
 <?php include_once('include/database.php');?>
 <?php include_once('include/functions.php');?>
+<?php 
+    global $connection;
+    $searchresult = "";
+    $sql = "SELECT * FROM blog ORDER BY datetime DESC";
+    if(isset($_GET['postsearch'])) {
+        $search = mysqli_real_escape_string($connection, htmlspecialchars($_GET['search']));
+        $sql = " SELECT * FROM blog WHERE
+            title LIKE '%$search%' OR
+            datetime LIKE '%$search%' OR
+            post_body LIKE '%$search%' OR
+            category LIKE '%$search%' 
+        ";
+        $result = array();
+        $result = $connection->query($sql);
+        if(mysqli_num_rows($result) <= 0){
+            $searchresult = "NO Post To Show";
+        }
+    }
+    $result = $connection->query($sql);
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -42,9 +62,9 @@
         <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
       </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    <form class="form-inline my-2 my-lg-0" action="" method="GET">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit" name="postsearch">Search</button>
     </form>
   </div>
   </div>
@@ -55,16 +75,15 @@
     <p>Made by Sundar</p>
     <div class="row">
     <div class="col-sm-8">
-    <?php 
-            global $connection;
-            $sql = "SELECT * FROM blog ORDER BY datetime DESC";
-            $all_data = $connection->query($sql);
-            if($all_data->num_rows > 0) {
-                while($row = $all_data->fetch_assoc()) {
-                    // echo print_r($row);
-                    // $image = base64_decode($row['image']);
-                    // echo $image;
-                    $image = $row['image'];
+    <?php if($searchresult) { ?>
+    <div class="alert alert-primary" role="alert">
+       <?php  echo $searchresult; ?>
+    </div>
+   <?php   } ?>
+    <?php
+            while($row = $result->fetch_assoc()){
+                $image= $row["image"];
+    
             ?> 
     <div class="card shadow p-3 mb-5 bg-dark text-light rounded">
         <img src="<?= $image ?>" class="card-img-top img-thumbnail rounded float-left" alt="..." >
@@ -81,9 +100,10 @@
         </div>
         </div>
         <?php
-            }
-            } else {
-                echo  "No Post To display";
+            // }
+            // } else {
+            //     echo  "No Post To display";
+            // }
             }
             ?>
     </div>
