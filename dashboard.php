@@ -139,7 +139,7 @@
                         <td><?php echo $publishedate ?></td>
                         <td><?php echo $category ?></td>
                         <td>
-                            <a href="EditPost.php?edit=<?php echo $id ?>"><button type="button" class="btn btn-success">Edit</button></a>
+                            <a href="EditPost.php?Edit=<?php echo $id ?>"><button type="button" class="btn btn-success">Edit</button></a>
                             <a href="FullPost.php?id=<?php echo $id ?>"><button type="button" class="btn btn-danger">Delete</button></a>
                         </td>
                         <td>

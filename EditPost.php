@@ -5,11 +5,11 @@
     global $connection;
     $postErr = "";
     $postSucc = "";
-    $urlId = $_GET["id"];
-    $sql = "SELECT * FROM blog WHERE id=$urlId";
-    $result = $connection->query($sql);
     
-    if (isset($_POST["submit"])){
+
+
+
+    if (isset($_POST["update"])){
 
         // To get form data
         $title = $_POST["title"]; 
@@ -64,6 +64,17 @@
                 }
             }
          }
+    } else {
+        $urlId = $_GET['Edit'];
+        $sql = "SELECT * FROM blog WHERE id='$urlId'";
+        $result = $connection->query($sql);
+        $data = $result->fetch_assoc();
+
+        $title = $data["title"];
+        $category = $data["category"];
+        $image = $data["image"];
+        $image = $data["image"];
+        $post_body = $data["post_body"];
     }
 
 
@@ -95,10 +106,11 @@
         <div class="row">
             <div class="col-sm-2">
                 <ul id="side_menu" class="nav flex-column nav-pills">
+                <br><br><br>
                     <li class="nav-item">
                         <a class="nav-link" href="dashboard.php">
                             <i class="fa fa-tachometer" aria-hidden="true"></i>
-                            <br><br><br>
+                            
                             &nbsp;Dashboard
                         </a>
                     </li>
@@ -155,7 +167,7 @@
                 <form action="AddNewPost.php" method="post" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="title" class="form-name">Title</label>
-                        <input type="text" class="form-control" id="title" aria-describedby="emailHelp" name="title">
+                        <input type="text" class="form-control" id="title" aria-describedby="emailHelp" name="title" value="<?php echo $title ?>">
                     </div>
                     <div class="form-group">
                         <label for="category" class="form-name">Select Category</label>
@@ -166,9 +178,9 @@
                             $res_data = $connection->query($sql);
                                 if($res_data->num_rows > 0) {
                                     while($row = $res_data->fetch_assoc()) {
-                                        $cateogyName = $row['category_name'];
+                                        $categoryName = $row['category_name'];
                                         ?>
-                                        <option> <?php echo "$cateogyName"; ?>  </option>
+                                        <option <?php if($category==$categoryName) echo 'selected="selected"'; ?>> <?php echo "$categoryName"; ?>  </option>
                         <?php }}else {
                          echo "Please Create the Category to create a new Post";
                         } ?> 
@@ -176,13 +188,16 @@
                     </div>
                     <div class="form-group">
                         <label for="image" class="form-name">Image</label>
+                        <div style="margin:10px">
+                            <img src="<?= $image ?>" alt="image" style="height:143px;width:270px;">
+                        </div>
                         <input type="file" class="form-control-file" id="image" name="Image">
                     </div>
                     <div class="form-group">
                         <label for="post" class="form-name">Post</label>
-                        <textarea class="form-control" id="post"  name="post_body"></textarea>
+                        <textarea class="form-control" id="post"  name="post_body"><?php echo $post_body ?></textarea>
                     </div>
-                    <button type="submit" class="btn btn-success btn-lg" name="submit">Add New Post</button>
+                    <button type="submit" class="btn btn-success btn-lg" name="update">Update</button>
                 </form>
             </div> <!-- ending of side area-->
         </div> <!-- ending  of row-->
