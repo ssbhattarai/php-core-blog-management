@@ -19,7 +19,7 @@
             $searchresult = "NO Post To Show";
         }
     }else {
-        $idOfURL = $_GET["id"];
+        $idOfURL = $_GET["id"];  //getid of url
         $sql = "SELECT * FROM blog WHERE id= $idOfURL";
     }
     $result = $connection->query($sql);
@@ -95,9 +95,11 @@
     <div class="card shadow p-3 mb-5 bg-dark text-light rounded">
         <img src="<?= $image ?>" class="card-img-top img-thumbnail rounded float-left" alt="..." >
         <div class="card-body">
-            <h5 class="card-title"><?php echo htmlentities($row['title']) ?></h5>
-            <small class="float-sm-left">Category: <?php echo htmlentities($row["category"])?> </small>
-            <small style="margin-left: 10px">Published on: <?php echo htmlentities($row["datetime"])?></small>
+            <h5 class="card-title" style="font-weight: bold; color: #7bea42;"><?php echo htmlentities($row['title']) ?></h5>
+            <div class="row row-cols-1 row-cols-sm-2">
+                <div class="col small-color">Category: <?php echo htmlentities($row["category"])?></div>
+                <div class="col small-color">Published on: <?php echo htmlentities($row["datetime"])?></div>
+            </div>
             <p class="card-text">
                 <?php 
                 echo htmlentities($row["post_body"]); ?></p>

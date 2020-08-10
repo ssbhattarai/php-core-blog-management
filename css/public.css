@@ -30,3 +30,9 @@
 #footer p a:hover {
     color: turquoise;
 }
+
+
+.small-color {
+    color: #e0c29b;
+    font-weight: 700;
+}
