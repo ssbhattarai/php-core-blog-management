@@ -106,7 +106,7 @@
                 <div class="col-sm-10">
                     <h1>Admin Dashboard </h1>
                 <div class="table-responsive">
-                    <table class="table table-striped">
+                    <table class="table table-striped table-hover text-center">
                     <thead>
                         <tr>
                         <th scope="col">SN</th>
@@ -122,6 +122,7 @@
                         <?php 
                             while( $row = $result->fetch_assoc() ){
                                 $sn++;
+                                $id = $row["id"];
                                 $image= $row["image"];
                                 $title = $row["title"];
                                 $publishedate = $row["datetime"];
@@ -129,13 +130,21 @@
                         ?>
                         <tr>
                         <th scope="row"><?php echo $sn ?></th>
-                        <td><?php echo $title ?></td>
-                        <td> <img src="<?= $image ?>" alt="banner" style="height:87px; width:178px;"> </td>
+                        <td><?php 
+                            if(strlen($title) > 20 ){
+                                $title = substr($title,0,20). '...';
+                            }
+                        echo $title ?></td>
+                        <td> <img src="<?= $image ?>" alt="banner" style="height:60px; width:130px;"> </td>
                         <td><?php echo $publishedate ?></td>
                         <td><?php echo $category ?></td>
-                        <td><button type="button" class="btn btn-success">Edit</button>
-                            <button type="button" class="btn btn-danger">Delete</button></td>
-                        <td><button type="button" class="btn btn-info">View Details</button></td>
+                        <td>
+                            <a href="EditPost.php?edit=<?php echo $id ?>"><button type="button" class="btn btn-success">Edit</button></a>
+                            <a href="FullPost.php?id=<?php echo $id ?>"><button type="button" class="btn btn-danger">Delete</button></a>
+                        </td>
+                        <td>
+                            <a href="FullPost.php?id=<?php echo $id ?>"><button type="button" class="btn btn-info">View Post</button> </a>
+                        </td>
                         </tr>
                             <?php } ?>
                     </tbody>
