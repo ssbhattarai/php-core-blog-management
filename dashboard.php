@@ -140,7 +140,7 @@
                         <td><?php echo $category ?></td>
                         <td>
                             <a href="EditPost.php?Edit=<?php echo $id ?>"><button type="button" class="btn btn-success">Edit</button></a>
-                            <a href="FullPost.php?id=<?php echo $id ?>"><button type="button" class="btn btn-danger">Delete</button></a>
+                            <a href="DeletePost.php?Delete=<?php echo $id ?>"><button type="button" class="btn btn-danger">Delete</button></a>
                         </td>
                         <td>
                             <a href="FullPost.php?id=<?php echo $id ?>"><button type="button" class="btn btn-info">View Post</button> </a>
