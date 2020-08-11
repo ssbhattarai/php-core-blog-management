@@ -5,16 +5,13 @@
     global $connection;
     $postErr = "";
     $postSucc = "";
-    
-
-
-
+    $urlId = $_GET['Edit'];
     if (isset($_POST["update"])){
 
         // To get form data
-        $title = $_POST["title"]; 
-        $category = $_POST["category"]; 
-        $post_body = $_POST["post_body"]; 
+        $titlepost = $_POST["title"]; 
+        $categorypost = $_POST["category"]; 
+        $post_bodypost = $_POST["post_body"]; 
 
         // for Created Date time
         date_default_timezone_get();
@@ -34,7 +31,7 @@
         // Valid file extensions
         $extensions_arr = array("jpg","jpeg","png","gif");
         
-        if(empty($title)) {
+        if(empty($titlepost)) {
             $postErr = "All Field must be filled out";
         // }
         //  elseif(strlen($title) > 1000) {
@@ -45,37 +42,49 @@
         if( in_array($imageFileType,$extensions_arr) ){
             // Insert record
             $image_base64 = base64_encode(file_get_contents($_FILES['Image']['tmp_name']) );     // Convert to base64 
-            $image = 'data:image/'.$imageFileType.';base64,'.$image_base64;
+            $imageUpload = 'data:image/'.$imageFileType.';base64,'.$image_base64;
             
             if (move_uploaded_file($_FILES['Image']['tmp_name'], $target_file)) {
 
-                $sql = "UPDATE blog SET
-                        WHERE id=";
+                $sql = "UPDATE blog SET 
+                datetime='$datetime',title = '$titlepost', category='$categorypost',image='$imageUpload',post_body='$post_bodypost'
+                WHERE id='$urlId'";
                 
                 if (mysqli_query($connection, $sql)) {
                     
-                    $postSucc = "New Post Added Successfully!!";
-                    
-                    redirect("AddNewPost.php");
+                    $postSucc = "post Successfully!!";
+                    redirect("dashboard.php");
                 } else {
+                    $postErr="something went worng";
                     echo "Error: " . $sql . "" . mysqli_error($connection);
                 }
                 //  $con->close();
+                } else {
+                    $sql = "UPDATE blog SET 
+                    datetime='$datetime',title = '$titlepost', category='$categorypost',post_body='$post_bodypost'
+                    WHERE id='$urlId'";
+                
+                if (mysqli_query($connection, $sql)) {
+                    
+                    $postSucc = "post Successfully!!";
+                    redirect("dashboard.php");
+                } else {
+                    $postErr="something went worng";
+                    echo "Error: " . $sql . "" . mysqli_error($connection);
+                }
                 }
             }
          }
-    } else {
-        $urlId = $_GET['Edit'];
-        $sql = "SELECT * FROM blog WHERE id='$urlId'";
-        $result = $connection->query($sql);
-        $data = $result->fetch_assoc();
-
-        $title = $data["title"];
-        $category = $data["category"];
-        $image = $data["image"];
-        $image = $data["image"];
-        $post_body = $data["post_body"];
     }
+    $sql = "SELECT * FROM blog WHERE id='$urlId'";
+    $result = $connection->query($sql);
+    $data = $result->fetch_assoc();
+    $title = $data["title"];
+    $category = $data["category"];
+    $image = $data["image"];
+    $image = $data["image"];
+    $post_body = $data["post_body"];
+
 
 
     
@@ -164,7 +173,7 @@
                     <?php echo $postSucc; ?>
                 </div>
                 <?php  } ?>
-                <form action="AddNewPost.php" method="post" enctype="multipart/form-data">
+                <form action="EditPost.php?Edit=<?php echo $urlId; ?>" method="post" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="title" class="form-name">Title</label>
                         <input type="text" class="form-control" id="title" aria-describedby="emailHelp" name="title" value="<?php echo $title ?>">
@@ -195,7 +204,7 @@
                     </div>
                     <div class="form-group">
                         <label for="post" class="form-name">Post</label>
-                        <textarea class="form-control" id="post"  name="post_body"><?php echo $post_body ?></textarea>
+                        <textarea class="form-control" id="post"  name="post_body" rows="15"><?php echo $post_body ?></textarea>
                     </div>
                     <button type="submit" class="btn btn-success btn-lg" name="update">Update</button>
                 </form>
