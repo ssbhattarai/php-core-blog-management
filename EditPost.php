@@ -76,6 +76,7 @@
             }
          }
     }
+
     $sql = "SELECT * FROM blog WHERE id='$urlId'";
     $result = $connection->query($sql);
     $data = $result->fetch_assoc();
@@ -84,12 +85,6 @@
     $image = $data["image"];
     $image = $data["image"];
     $post_body = $data["post_body"];
-
-
-
-    
-
-
 ?>
 
 
@@ -161,6 +156,10 @@
                     </li>
                 </ul>
             </div> <!-- ending of side area-->
+
+
+
+
             <div class="col-sm-10">
                 <h1>Add New Post </h1>
                 <?php if($postErr){ ?>
@@ -211,6 +210,8 @@
             </div> <!-- ending of side area-->
         </div> <!-- ending  of row-->
     </div> <!-- ennd containger-->
+
+    
     <div id="footer">
         <!-- Footer div -->
         <hr>

@@ -58,6 +58,7 @@
 <body>
     <div class="container-fluid">
         <div class="row">
+
             <div class="col-sm-2">
                 <h1>shyam</h1>
                 <ul id="side_menu" class="nav flex-column nav-pills">
@@ -105,6 +106,8 @@
                     </li>
                 </ul>
             </div> <!-- ending of side area-->
+
+
             <div class="col-sm-10">
                 <h1>Manage Category </h1>
                 <?php if($categoryErr){ ?>
@@ -124,6 +127,9 @@
                     </div>
                     <button type="submit" class="btn btn-success btn-lg" name="submit">Add Category</button>
                 </form>
+
+
+                <!-- Category Table -->
                 <h4 style="margin-top: 20px;text-align:center; font-weight:bold;" > Category Table </h4>
                 <div style="margin-top: 26px;" class="table-responsive">
                     
@@ -265,8 +271,11 @@
         <?php } ?>
                 </div>
             </div> <!-- ending of side area-->
+
         </div> <!-- ending  of row-->
     </div> <!-- ennd containger-->
+
+    
     <div id="footer">
         <!-- Footer div -->
         <hr>

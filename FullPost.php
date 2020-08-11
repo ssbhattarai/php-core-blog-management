@@ -27,6 +27,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -36,8 +37,11 @@
     <link rel="stylesheet" type="text/css" href="css/public.css">
     <title>Full Post</title>
 </head>
+
+
 <body>
     <div style="height:10px;background: #227b5a;"></div>
+
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 <div class="container">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
@@ -73,7 +77,10 @@
   </div>
   </div>
 </nav>
+
+
 <div style="height:10px;background: #227b5a;"></div>
+
 <div class="container">
     <h1>Full PHP BLOG CMS </h1>
     <p>Made by Sundar</p>
@@ -105,14 +112,10 @@
                 echo htmlentities($row["post_body"]); ?></p>
         </div>
         </div>
-        <?php
-            // }
-            // } else {
-            //     echo  "No Post To display";
-            // }
-            }
-            ?>
+        <?php } ?>
     </div>
+
+    <!-- side of page -->
     <div class="offset-sm-1 col-sm-3">
     <h2 style="text-align:center;">Categories</h2>
     <ul class="list-group">
@@ -133,6 +136,8 @@
     </div>
   </div>
 </div>
+
+
 <div id="footer"> <!-- Footer div -->
         <hr>
             <p> | &copy; | 2020 <a href="https://sambhattarai.com.np" target="_blank">SAMBHATTARAI</a> All Right Reserved</p>

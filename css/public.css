@@ -1,0 +1,38 @@
+.navbar-dark .navbar-nav .active>.nav-link, .navbar-dark .navbar-nav .nav-link.active, .navbar-dark .navbar-nav .nav-link.show, .navbar-dark .navbar-nav .show>.nav-link {
+    color: #45a539;
+}
+
+
+.navbar { 
+    font-family:Verdana !important;
+    font-weight: bold;
+ }
+
+
+ #footer {
+     position: relative;
+    padding: 10px;
+    background-color: darkslategray;
+}
+
+
+#footer p {
+    text-align: center;
+    color: white;
+}
+
+#footer p a {
+    color: rgb(82, 151, 230);
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#footer p a:hover {
+    color: turquoise;
+}
+
+
+.small-color {
+    color: #e0c29b;
+    font-weight: 700;
+}

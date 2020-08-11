@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
+
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +11,8 @@
     <link rel="stylesheet" type="text/css" href="css/public.css">
     <title>Home </title>
 </head>
+
+
 <body>
     <div style="height:10px;background: #227b5a;"></div>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -41,12 +45,6 @@
   </div>
 </nav>
 <div style="height:10px;background: #227b5a;"></div>
-
-
-
-
-
-
 
 
 </body>
