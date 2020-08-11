@@ -38,7 +38,6 @@
         //     $postErr = "Category Name is Too long";
         }else {
             
-        global $connection;
         if( in_array($imageFileType,$extensions_arr) ){
             // Insert record
             $image_base64 = base64_encode(file_get_contents($_FILES['Image']['tmp_name']) );     // Convert to base64 
@@ -59,7 +58,8 @@
                     echo "Error: " . $sql . "" . mysqli_error($connection);
                 }
                 //  $con->close();
-                } else {
+                }
+            } else {
                     $sql = "UPDATE blog SET 
                     datetime='$datetime',title = '$titlepost', category='$categorypost',post_body='$post_bodypost'
                     WHERE id='$urlId'";
@@ -72,7 +72,7 @@
                     $postErr="something went worng";
                     echo "Error: " . $sql . "" . mysqli_error($connection);
                 }
-                }
+                
             }
          }
     }
