@@ -143,13 +143,31 @@
                     if($connection->query($sql)){
                       $commentSuc = "Added Comment Wait for approve your comment by admin";
                       //  redirect("FullPost?id=$postid");
-                    }else {
+                    } elseif(strlen($comment) > 500){
+
+                        $commentErr = "Only 500 Words are allowed !!";
+                      } else {
                       $commentErr = "Something Went Wrong";
                     }
                   }
               }
+              $comments = "SELECT * FROM comments WHERE blog_id=$postid";
+              $allComments = $connection->query($comments);
         ?>
-          <?php if($commentErr) {  ?>
+        <h4>Comments: </h4>
+        <div class="card" style="background:aliceblue;">
+          <div class="card-body">
+           <?php while($commentFetch = $allComments->fetch_assoc()){ ?>
+          <div class="row">
+            <div class="col" style="display: block; color:#3eca6f;"><img src="https://cdn4.iconfinder.com/data/icons/small-n-flat/24/user-alt-512.png" alt="" style="height:48px;">
+            <?php echo $commentFetch["name"];?><br> <p style="margin-left: 50px"><?php echo $commentFetch["datetime"];?></p><p style="margin-left: 50px"><?php echo $commentFetch["comment"];?></p></div>
+          </div>
+           <?php } ?>
+          </div>
+        </div>
+
+            <h4 class="form-name">ADD thoughts about this post</h4>
+            <?php if($commentErr) {  ?>
               <div class="alert alert-danger" role="alert">
                 <?php echo $commentErr; ?>
               </div>
@@ -160,8 +178,6 @@
                 <?php echo $commentSuc; ?>
               </div>
           <?php } ?>
-          
-            <h4 class="form-name">ADD thoughts about this post</h4>
         <form action="FullPost.php?id=<?php echo $postid; ?>" method="post" enctype="multipart/form-data">
         <div class="form-group">
                         <label for="Name" class="form-name">Name</label>
