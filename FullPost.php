@@ -97,9 +97,9 @@
     </div>
    <?php   } ?>
     <?php   
-            if(mysqli_num_rows($result) <= 0){
-                $searchresult = "NO Post To Show";
-            }
+            // if(mysqli_num_rows($result) <= 0){
+            //     $searchresult = "NO Post To Show";
+            // }
             while($row = $result->fetch_assoc()){
                 $image= $row["image"];
     
@@ -119,9 +119,10 @@
         </div>
         <?php } ?>
         <?php 
-              $postid = $_GET['id'];
+              $postid = $_GET["id"];
               $commentErr  = '';
               $commentSuc = '';
+
               if(isset($_POST["submit"])){
                   $name = $_POST["name"];
                   $email = $_POST["email"];
@@ -138,9 +139,10 @@
 
                     $sql = "INSERT INTO comments(datetime,name,email,comment,blog_id)
                             VALUES('$datetime','$name','$email','$comment','$postid')";
+
                     if($connection->query($sql)){
                       $commentSuc = "Added Comment Wait for approve your comment by admin";
-                      redirect("FullPost?id=$postid");
+                      //  redirect("FullPost?id=$postid");
                     }else {
                       $commentErr = "Something Went Wrong";
                     }
@@ -160,7 +162,7 @@
           <?php } ?>
           
             <h4 class="form-name">ADD thoughts about this post</h4>
-        <form action="FullPost.php?" method="post" enctype="multipart/form-data">
+        <form action="FullPost.php?id=<?php echo $postid; ?>" method="post" enctype="multipart/form-data">
         <div class="form-group">
                         <label for="Name" class="form-name">Name</label>
                         <input type="text" class="form-control" id="Name"  name="name">
