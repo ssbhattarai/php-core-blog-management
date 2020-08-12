@@ -25,6 +25,11 @@
     $result = $connection->query($sql);
 ?>
 
+<?php 
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -113,6 +118,66 @@
         </div>
         </div>
         <?php } ?>
+        <?php 
+              $postid = $_GET['id'];
+              $commentErr  = '';
+              $commentSuc = '';
+              if(isset($_POST["submit"])){
+                  $name = $_POST["name"];
+                  $email = $_POST["email"];
+                  $comment = $_POST["comment"];
+                  
+                  // for Created Date time
+                  date_default_timezone_get();
+                  $current_time = time();
+                  $datetime = strftime("%B-%d-%Y %H:%M:%S");
+                  
+                  if(empty($name) || empty($email) || empty($comment)){
+                    $commentErr = "All Field is Required";
+                  } else {
+
+                    $sql = "INSERT INTO comments(datetime,name,email,comment,blog_id)
+                            VALUES('$datetime','$name','$email','$comment','$postid')";
+                    if($connection->query($sql)){
+                      $commentSuc = "Added Comment Wait for approve your comment by admin";
+                      redirect("FullPost?id=$postid");
+                    }else {
+                      $commentErr = "Something Went Wrong";
+                    }
+                  }
+              }
+        ?>
+          <?php if($commentErr) {  ?>
+              <div class="alert alert-danger" role="alert">
+                <?php echo $commentErr; ?>
+              </div>
+          <?php } ?>
+
+          <?php if($commentSuc) {  ?>
+              <div class="alert alert-success" role="alert">
+                <?php echo $commentSuc; ?>
+              </div>
+          <?php } ?>
+          
+            <h4 class="form-name">ADD thoughts about this post</h4>
+        <form action="FullPost.php?" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+                        <label for="Name" class="form-name">Name</label>
+                        <input type="text" class="form-control" id="Name"  name="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="form-name">Email</label>
+                        <input type="email" class="form-control" id="email" placeholder="Email" name="email">
+                        <small id="email" class="form-text text-muted">
+                          Email Must be Valid
+                        </small>
+                    </div>
+                    <div class="form-group">
+                        <label for="comment" class="form-name">Comment</label>
+                        <textarea class="form-control" id="comment"  name="comment"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-success btn-lg" name="submit">Comment</button>
+                </form>
     </div>
 
     <!-- side of page -->

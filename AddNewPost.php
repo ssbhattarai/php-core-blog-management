@@ -179,6 +179,7 @@
                     </div>
                     <button type="submit" class="btn btn-success btn-lg" name="submit">Add New Post</button>
                 </form>
+                
             </div> <!-- ending of side area-->
         </div> <!-- ending  of row-->
     </div> <!-- ennd containger-->

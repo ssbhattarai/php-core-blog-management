@@ -1,3 +1,8 @@
+body {
+    font-family: 'B612', sans-serif;
+}
+
+
 .navbar-dark .navbar-nav .active>.nav-link, .navbar-dark .navbar-nav .nav-link.active, .navbar-dark .navbar-nav .nav-link.show, .navbar-dark .navbar-nav .show>.nav-link {
     color: #45a539;
 }
@@ -35,4 +40,10 @@
 .small-color {
     color: #e0c29b;
     font-weight: 700;
+}
+
+.form-name {
+    color: #61ce4d;
+    font-weight: bold;
+    font-family: cursive;
 }
