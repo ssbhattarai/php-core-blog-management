@@ -151,20 +151,21 @@
                     }
                   }
               }
-              $comments = "SELECT * FROM comments WHERE blog_id=$postid";
+              $comments = "SELECT * FROM comments WHERE blog_id=$postid and status= 'Approve'";
               $allComments = $connection->query($comments);
         ?>
         <h4>Comments: </h4>
-        <div class="card" style="background:aliceblue;">
+        <?php while($commentFetch = $allComments->fetch_assoc()){ ?>
+        <div class="card" style="background:aliceblue; margin:20px">
           <div class="card-body">
-           <?php while($commentFetch = $allComments->fetch_assoc()){ ?>
           <div class="row">
             <div class="col" style="display: block; color:#3eca6f;"><img src="https://cdn4.iconfinder.com/data/icons/small-n-flat/24/user-alt-512.png" alt="" style="height:48px;">
             <?php echo $commentFetch["name"];?><br> <p style="margin-left: 50px"><?php echo $commentFetch["datetime"];?></p><p style="margin-left: 50px"><?php echo $commentFetch["comment"];?></p></div>
           </div>
-           <?php } ?>
+           
           </div>
         </div>
+        <?php } ?>
 
             <h4 class="form-name">ADD thoughts about this post</h4>
             <?php if($commentErr) {  ?>
