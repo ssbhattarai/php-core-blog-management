@@ -4,7 +4,7 @@
     global $connection;
     $dataError='';
     $sn=0 ;
-    $sql="SELECT * FROM blog ORDER BY datetime DESC" ;
+    $sql="SELECT * FROM comments ORDER BY datetime DESC" ;
     $result=$connection->query($sql);
 
     ?>
@@ -19,7 +19,7 @@
 	<script src="js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="css/adminstyles.css">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-	<title>Dashboard</title>
+	<title>Comments</title>
 	<style>
 	</style>
 </head>
@@ -76,7 +76,7 @@
 							&nbsp;Manage Admins</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="Comments.php"> <i class="fa fa-comments" aria-hidden="true"></i>
+						<a class="nav-link active" href="Comments.php"> <i class="fa fa-comments" aria-hidden="true"></i>
 							&nbsp;Comments</a>
 					</li>
 					<li class="nav-item">
@@ -91,16 +91,16 @@
 			</div>
 			<!-- ending of side area-->
 			<div class="col-sm-10">
-				<h1>Admin Dashboard </h1>
+				<h1>Comments </h1>
 				<div class="table-responsive">
 					<table class="table table-striped table-hover text-center">
 						<thead>
 							<tr>
 								<th scope="col">SN</th>
-								<th scope="col">Title</th>
-								<th scope="col">Banner</th>
-								<th scope="col">Published date</th>
-								<th scope="col">Category</th>
+								<th scope="col">Name</th>
+								<th scope="col">Email</th>
+								<th scope="col">Comments</th>
+								<th scope="col">Status</th>
 								<th scope="col">Actions</th>
 								<th scope="col">Details</th>
 							</tr>
@@ -110,40 +110,45 @@
                              while( $row=$result->fetch_assoc() ){ 
                                  $sn++;
                                  $id = $row["id"];
-                                 $image= $row["image"]; 
-                                 $title = $row["title"]; 
+                                 $name= $row["name"]; 
+                                 $email = $row["email"]; 
+                                 $comments = $row["comment"]; 
                                  $publishedate = $row["datetime"]; 
-                                 $category = $row["category"]; 
+                                 $status = $row["status"]; 
                             ?>
 							<tr>
 								<th scope="row">
 									<?php echo $sn ?>
 								</th>
 								<td>
-									<?php if(strlen($title)>20 ){
-                                         $title = substr($title,0,20). '...'; 
-                                         } 
-                                         echo $title ?>
+									<?php 
+                                         echo $name ?>
                                         </td>
 								<td>
-									<img src="<?= $image ?>" alt="banner" style="height:60px; width:130px;">
+									<?php echo $email; ?>
 								</td>
 								<td>
-									<?php echo $publishedate ?>
+									<?php echo $comments; ?>
 								</td>
 								<td>
-									<?php echo $category ?>
+                                    <?php if($status == "Pending"){ ?>
+                                        <span class="badge badge-success"><?php echo $status; ?></span>
+                                    <?php } ?>
+                                    <?php if($status == "Approve"){ ?>
+                                        <span class="badge badge-danger"><?php echo $status; ?></span>
+                                    <?php } ?>
+                                    
 								</td>
 								<td>
-									<a href="EditPost.php?Edit=<?php echo $id ?>">
+									<a href="#">
 										<button type="button" class="btn btn-success">Edit</button>
 									</a>
-									<a href="DeletePost.php?Delete=<?php echo $id ?>">
+									<a href="#">
 										<button type="button" class="btn btn-danger">Delete</button>
 									</a>
 								</td>
 								<td>
-									<a href="FullPost.php?id=<?php echo $id ?>">
+									<a href="">
 										<button type="button" class="btn btn-info">View Post</button>
 									</a>
 								</td>
