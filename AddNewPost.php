@@ -4,6 +4,11 @@
 <?php 
     $postErr = "";
     $postSucc = "";
+
+    $unapproveCommentCount = "SELECT count(*) as upapproveComment from comments where status='Pending'";
+	$count = $connection->query($unapproveCommentCount);
+
+
     if (isset($_POST["submit"])){
 
         // To get form data
@@ -116,11 +121,12 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <i class="fa fa-comments" aria-hidden="true"></i>
-                            &nbsp;Comments
-                        </a>
-                    </li>
+						<a class="nav-link" href="Comments.php"> <i class="fa fa-comments" aria-hidden="true"></i>
+							&nbsp;Comments <?php while($countcom = $count->fetch_assoc()){
+								$unapprove = $countcom["upapproveComment"];
+							} ?>
+							<?php if($unapprove > 0){ ?><span class="badge badge-danger" style="float:right;"><?php echo $unapprove ?></span> <?php } ?></a>
+					</li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">
                             <i class="fa fa-rss" aria-hidden="true"></i>
