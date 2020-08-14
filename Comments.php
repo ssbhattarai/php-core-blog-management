@@ -60,7 +60,7 @@
 				<br>
 				<ul id="side_menu" class="nav flex-column nav-pills">
 					<li class="nav-item">
-						<a class="nav-link active" href="dashboard.php"> <i class="fa fa-tachometer" aria-hidden="true"></i>
+						<a class="nav-link" href="dashboard.php"> <i class="fa fa-tachometer" aria-hidden="true"></i>
 							&nbsp;Dashboard</a>
 					</li>
 					<li class="nav-item">
@@ -131,18 +131,22 @@
 									<?php echo $comments; ?>
 								</td>
 								<td>
-                                    <?php if($status == "Pending"){ ?>
+                                    <?php if($status == "Approve"){ ?>
                                         <span class="badge badge-success"><?php echo $status; ?></span>
                                     <?php } ?>
-                                    <?php if($status == "Approve"){ ?>
+                                    <?php if($status == "Pending"){ ?>
                                         <span class="badge badge-danger"><?php echo $status; ?></span>
                                     <?php } ?>
                                     
 								</td>
 								<td>
-									<a href="#">
-										<button type="button" class="btn btn-success">Edit</button>
-									</a>
+									
+                                        <?php if($status == "Pending") { ?>
+											<a href="ApproveComment.php?id=<?php echo $id; ?>">
+                                            <button type="button" class="btn btn-success">Approve</button>
+											</a>
+                                        <?php } ?>
+									
 									<a href="#">
 										<button type="button" class="btn btn-danger">Delete</button>
 									</a>
