@@ -128,7 +128,10 @@
 									<?php echo $email; ?>
 								</td>
 								<td>
-									<?php echo $comments; ?>
+									<?php if(strlen($comments) > 10){
+										$comments = substr($comments, 0,10). "..";
+									}
+									echo $comments; ?>
 								</td>
 								<td>
                                     <?php if($status == "Approve"){ ?>
@@ -146,8 +149,14 @@
                                             <button type="button" class="btn btn-success">Approve</button>
 											</a>
                                         <?php } ?>
+										<?php if($status == "Approve") { ?>
+											<a href="disApproveComment.php?id=<?php echo $id; ?>">
+                                            <button type="button" class="btn btn-warning">Dis-approve</button>
+											</a>
+                                        <?php } ?>
 									
-									<a href="#">
+									
+									<a href="DeleteComment.php?id=<?php echo $id; ?>">
 										<button type="button" class="btn btn-danger">Delete</button>
 									</a>
 								</td>
