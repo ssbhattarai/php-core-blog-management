@@ -108,6 +108,7 @@
 								<th scope="col">Banner</th>
 								<th scope="col">Published date</th>
 								<th scope="col">Category</th>
+								<th scope="col">Comments</th>
 								<th scope="col">Actions</th>
 								<th scope="col">Details</th>
 							</tr>
@@ -140,6 +141,27 @@
 								</td>
 								<td>
 									<?php echo $category ?>
+								</td>
+								<td>
+									<?php 
+										// For Pending Comments
+										global $connection;
+										$Count=mysqli_query($connection,"SELECT count(*) as total from comments where blog_id='$id' and status = 'Pending'");
+										$data=mysqli_fetch_assoc($Count);
+										if($data["total"] > 0){
+											echo "<span class='badge badge-danger'>".$data['total'] ."</span>";
+										}
+										
+									?>
+									<?php 
+										// For Approve Comments
+										global $connection;
+										$CountApprove=mysqli_query($connection,"SELECT count(*) as total from comments where blog_id='$id' and status = 'Approve'");
+										$dataApprove=mysqli_fetch_assoc($CountApprove);
+										if($dataApprove["total"] > 0){
+											echo "<span class='badge badge-success'>".$dataApprove['total'] ."</span>";
+										}
+									?>
 								</td>
 								<td>
 									<a href="EditPost.php?Edit=<?php echo $id ?>">
