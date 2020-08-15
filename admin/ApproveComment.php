@@ -1,5 +1,5 @@
-<?php include_once("include/database.php"); ?>
-<?php include_once("include/functions.php"); ?>
+<?php include_once("../include/database.php"); ?>
+<?php include_once("../include/functions.php"); ?>
 <?php 
 
     global $connection;

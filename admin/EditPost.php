@@ -1,5 +1,5 @@
-<?php  require_once("include/database.php")?>
-<?php  require_once("include/functions.php")?>
+<?php  require_once("../include/database.php")?>
+<?php  require_once("../include/functions.php")?>
 
 <?php 
     global $connection;
@@ -22,7 +22,7 @@
 
         //Image Upload 
         $image_name = $_FILES['Image']['name'];
-        $target_dir = "images/";
+        $target_dir = "../images/";
         $target_file = $target_dir . basename($_FILES["Image"]["name"]);
 
         // Select file type
@@ -95,9 +95,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <script src="js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="css/adminstyles.css">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <script src="../js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../css/adminstyles.css">
     <link href="https://fonts.googleapis.com/css2?family=B612&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>ADMIN-Edit Post</title>

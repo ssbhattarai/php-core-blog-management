@@ -1,15 +1,16 @@
-<?php include_once( 'include/database.php'); ?>
-<?php include_once( 'include/functions.php'); ?>
+<?php include_once( '../include/database.php'); ?>
+<?php include_once( '../include/functions.php'); ?>
 <?php 
     global $connection;
     $dataError='';
     $sn=0 ;
-    $sql="SELECT * FROM comments ORDER BY datetime DESC" ;
+    $sql="SELECT * FROM blog ORDER BY datetime DESC" ;
     $result=$connection->query($sql);
-	
+
+
 	$unapproveCommentCount = "SELECT count(*) as upapproveComment from comments where status='Pending'";
 	$count = $connection->query($unapproveCommentCount);
-	
+
     ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,11 +19,11 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<script src="js/bootstrap.min.js"></script>
-	<link rel="stylesheet" href="css/adminstyles.css">
+	<link rel="stylesheet" href="../css/bootstrap.min.css">
+	<script src="../js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="../css/adminstyles.css">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-	<title>Comments</title>
+	<title>Dashboard</title>
 	<style>
 	</style>
 </head>
@@ -36,13 +37,13 @@
 			<div class="collapse navbar-collapse" id="navbarTogglerDemo01">
 				<div class="nav-header">
 					<a href="index.php" style="argin: -6px;margin-right: 10px;">
-						<img src="static/sundarBlog.png" alt="sundarblog" style="width:8em;">
+						<img src="../static/sundarBlog.png" alt="sundarblog" style="width:8em;">
 					</a>
 				</div>
 				<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-					<li class="nav-item active"> <a class="nav-link" href="index.php">Home</a>
+					<li class="nav-item active"> <a class="nav-link" href="../index.php">Home</a>
 					</li>
-					<li class="nav-item"> <a class="nav-link" href="blog.php" target="_blank">Blog</a>
+					<li class="nav-item"> <a class="nav-link" href="../blog.php" target="_blank">Blog</a>
 					</li>
 					<li class="nav-item"> <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
 					</li>
@@ -63,7 +64,7 @@
 				<br>
 				<ul id="side_menu" class="nav flex-column nav-pills">
 					<li class="nav-item">
-						<a class="nav-link" href="dashboard.php"> <i class="fa fa-tachometer" aria-hidden="true"></i>
+						<a class="nav-link active" href="dashboard.php"> <i class="fa fa-tachometer" aria-hidden="true"></i>
 							&nbsp;Dashboard</a>
 					</li>
 					<li class="nav-item">
@@ -79,7 +80,7 @@
 							&nbsp;Manage Admins</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link active" href="Comments.php"> <i class="fa fa-comments" aria-hidden="true"></i>
+						<a class="nav-link" href="Comments.php"> <i class="fa fa-comments" aria-hidden="true"></i>
 							&nbsp;Comments <?php while($countcom = $count->fetch_assoc()){
 								$unapprove = $countcom["upapproveComment"];
 							} ?>
@@ -97,16 +98,17 @@
 			</div>
 			<!-- ending of side area-->
 			<div class="col-sm-10">
-				<h1>Comments </h1>
+				<h1>Admin Dashboard </h1>
 				<div class="table-responsive">
 					<table class="table table-striped table-hover text-center">
 						<thead>
 							<tr>
 								<th scope="col">SN</th>
-								<th scope="col">Name</th>
-								<th scope="col">Email</th>
+								<th scope="col">Title</th>
+								<th scope="col">Banner</th>
+								<th scope="col">Published date</th>
+								<th scope="col">Category</th>
 								<th scope="col">Comments</th>
-								<th scope="col">Status</th>
 								<th scope="col">Actions</th>
 								<th scope="col">Details</th>
 							</tr>
@@ -116,58 +118,61 @@
                              while( $row=$result->fetch_assoc() ){ 
                                  $sn++;
                                  $id = $row["id"];
-                                 $name= $row["name"]; 
-                                 $email = $row["email"]; 
-                                 $comments = $row["comment"]; 
+                                 $image= $row["image"]; 
+                                 $title = $row["title"]; 
                                  $publishedate = $row["datetime"]; 
-                                 $status = $row["status"]; 
+                                 $category = $row["category"]; 
                             ?>
 							<tr>
 								<th scope="row">
 									<?php echo $sn ?>
 								</th>
 								<td>
-									<?php 
-                                         echo $name ?>
+									<?php if(strlen($title)>20 ){
+                                         $title = substr($title,0,20). '...'; 
+                                         } 
+                                         echo $title ?>
                                         </td>
 								<td>
-									<?php echo $email; ?>
+									<img src="<?= $image ?>" alt="banner" style="height:60px; width:130px;">
 								</td>
 								<td>
-									<?php if(strlen($comments) > 10){
-										$comments = substr($comments, 0,10). "..";
-									}
-									echo $comments; ?>
+									<?php echo $publishedate ?>
 								</td>
 								<td>
-                                    <?php if($status == "Approve"){ ?>
-                                        <span class="badge badge-success"><?php echo $status; ?></span>
-                                    <?php } ?>
-                                    <?php if($status == "Pending"){ ?>
-                                        <span class="badge badge-danger"><?php echo $status; ?></span>
-                                    <?php } ?>
-                                    
+									<?php echo $category ?>
 								</td>
 								<td>
-									
-                                        <?php if($status == "Pending") { ?>
-											<a href="ApproveComment.php?id=<?php echo $id; ?>">
-                                            <button type="button" class="btn btn-success">Approve</button>
-											</a>
-                                        <?php } ?>
-										<?php if($status == "Approve") { ?>
-											<a href="disApproveComment.php?id=<?php echo $id; ?>">
-                                            <button type="button" class="btn btn-warning">Dis-approve</button>
-											</a>
-                                        <?php } ?>
-									
-									
-									<a href="DeleteComment.php?id=<?php echo $id; ?>">
+									<?php 
+										// For Pending Comments
+										global $connection;
+										$Count=mysqli_query($connection,"SELECT count(*) as total from comments where blog_id='$id' and status = 'Pending'");
+										$data=mysqli_fetch_assoc($Count);
+										if($data["total"] > 0){
+											echo "<span class='badge badge-danger'>".$data['total'] ."</span>";
+										}
+										
+									?>
+									<?php 
+										// For Approve Comments
+										global $connection;
+										$CountApprove=mysqli_query($connection,"SELECT count(*) as total from comments where blog_id='$id' and status = 'Approve'");
+										$dataApprove=mysqli_fetch_assoc($CountApprove);
+										if($dataApprove["total"] > 0){
+											echo "<span class='badge badge-success'>".$dataApprove['total'] ."</span>";
+										}
+									?>
+								</td>
+								<td>
+									<a href="EditPost.php?Edit=<?php echo $id ?>">
+										<button type="button" class="btn btn-success">Edit</button>
+									</a>
+									<a href="DeletePost.php?Delete=<?php echo $id ?>">
 										<button type="button" class="btn btn-danger">Delete</button>
 									</a>
 								</td>
 								<td>
-									<a href="">
+									<a href="../FullPost.php?id=<?php echo $id ?>">
 										<button type="button" class="btn btn-info">View Post</button>
 									</a>
 								</td>
