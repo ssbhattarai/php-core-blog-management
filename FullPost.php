@@ -142,7 +142,8 @@
 
                     if($connection->query($sql)){
                       $commentSuc = "Added Comment Wait for approve your comment by admin";
-                      //  redirect("FullPost?id=$postid");
+                      //  redirect("FullPost?id=</$postid");
+                      
                     } elseif(strlen($comment) > 500){
 
                         $commentErr = "Only 500 Words are allowed !!";

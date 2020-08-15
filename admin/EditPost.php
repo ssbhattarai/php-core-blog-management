@@ -131,7 +131,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="admins.php">
                             <i class="fa fa-users" aria-hidden="true"></i>
                             &nbsp;Manage Admins
                         </a>

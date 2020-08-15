@@ -2,8 +2,8 @@
 <?php  require_once("../include/functions.php")?>
 
 <?php 
-    $categoryErr = "";
-    $categorySucc = "";
+    $adminErr = "";
+    $adminSucc = "";
 
 
     $unapproveCommentCount = "SELECT count(*) as upapproveComment from comments where status='Pending'";
@@ -12,7 +12,12 @@
 
     if (isset($_POST["submit"])){
 
-        $category = $_POST["category"]; 
+        $username = $_POST["username"]; 
+        $password = $_POST["password"]; 
+        $confirm_password = $_POST["confirm_password"]; 
+
+
+        $passwordHash = password_hash($password, PASSWORD_DEFAULT);  
 
         // DateTimeZone('Asia/Katmandu');
         date_default_timezone_get();
@@ -21,19 +26,21 @@
         $admin = "SHyam";
 
         
-        if(empty($category)) {
-            $categoryErr = "All Field must be filled out";
-        } elseif(strlen($category) > 1000) {
-            $categoryErr = "Category Name is Too long";
+        if(empty($username) || empty($password) || empty($confirm_password)) {
+            $adminErr = "All Field must be filled out";
+        } elseif(strlen($password) < 6) {
+            $adminErr = "Password must contains at least 6 character";
+        }elseif($password != $confirm_password){
+            $adminErr = "Password must be same";
         }else {
             
         global $connection;
-         $sql = "INSERT INTO category(category_name,datetime,creatorname)
-                    VALUES('$category','$datetime','$admin')";
+         $sql = "INSERT INTO admins(datetime,username,password,addedby)
+                    VALUES('$datetime','$username','$passwordHash','$admin')";
                     
         if (mysqli_query($connection, $sql)) {
-            $categorySucc = "New Category Added Successfully!!";
-            redirect("categories.php");
+            $categorySucc = "New user Added Successfully!!";
+            redirect("admins.php");
          } else {
             echo "Error: " . $sql . "" . mysqli_error($connection);
          }
@@ -56,7 +63,7 @@
     <link rel="stylesheet" href="../css/adminstyles.css">
     <link href="https://fonts.googleapis.com/css2?family=B612&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <title>ADMIN</title>
+    <title>Manage Admins</title>
     <style>
     </style>
 </head>
@@ -81,13 +88,13 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="categories.php">
+                        <a class="nav-link" href="categories.php">
                             <i class="fa fa-tags" aria-hidden="true"></i>
                             &nbsp;Categories
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="admins.php">
+                        <a class="nav-link active" href="admins.php">
                             <i class="fa fa-users" aria-hidden="true"></i>
                             &nbsp;Manage Admins
                         </a>
@@ -117,22 +124,30 @@
 
             <div class="col-sm-10">
                 <h1>Manage Category </h1>
-                <?php if($categoryErr){ ?>
+                <?php if($adminErr){ ?>
                 <div class="alert alert-danger" role="alert">
-                    <?php echo $categoryErr; ?>
+                    <?php echo $adminErr; ?>
                 </div>
                 <?php  } ?>
-                <?php if($categorySucc){ ?>
+                <?php if($adminSucc){ ?>
                 <div class="alert alert-success" role="alert">
-                    <?php echo $categorySucc; ?>
+                    <?php echo $adminSucc; ?>
                 </div>
                 <?php  } ?>
-                <form action="categories.php" method="post">
+                <form action="admins.php" method="post">
                     <div class="form-group">
-                        <label for="exampleInputEmail1" class="form-name">Category Name</label>
-                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="category">
+                        <label for="usename" class="form-name">Username</label>
+                        <input type="text" class="form-control" id="username" name="username">
                     </div>
-                    <button type="submit" class="btn btn-success btn-lg" name="submit">Add Category</button>
+                    <div class="form-group">
+                        <label for="password" class="form-name">Password</label>
+                        <input type="password" class="form-control" id="password" name="password">
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword" class="form-name">Confirm Password</label>
+                        <input type="password" class="form-control" id="confirmPassword" name="confirm_password">
+                    </div>
+                    <button type="submit" class="btn btn-success btn-lg" name="submit">Add User</button>
                 </form>
 
 
