@@ -171,13 +171,15 @@
                                 <th scope="col">Datetime </th>
                                 <th scope="col">Username</th>
                                 <th scope="col">Added by</th>
+                                <th scope="col">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                         <?php 
                         if($admin->num_rows > 0) {
                             while($row = mysqli_fetch_assoc($admin)) {
-                                echo "<tr><td>{$row['id']}</td><td>{$row['datetime']}</td><td>{$row['username']}</td><td>{$row['addedby']}</td></tr>\n";
+                                echo "<tr><td>{$row['id']}</td><td>{$row['datetime']}</td><td>{$row['username']}</td><td>{$row['addedby']}</td>
+                                <td><a href='DeleteAdmin.php?Delete={$row['id']}'><button class='btn btn-danger'>Delete</button></a></td></tr>\n";
                             }
                         } else {
                             $dataErr = "No data To display";
