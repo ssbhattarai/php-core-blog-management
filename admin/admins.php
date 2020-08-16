@@ -17,7 +17,7 @@
         $confirm_password = $_POST["confirm_password"]; 
 
 
-        $passwordHash = password_hash($password, PASSWORD_DEFAULT);  
+        // $passwordHash = password_hash($password, PASSWORD_DEFAULT);  
 
         // DateTimeZone('Asia/Katmandu');
         date_default_timezone_get();
@@ -36,7 +36,7 @@
             
         global $connection;
          $sql = "INSERT INTO admins(datetime,username,password,addedby)
-                    VALUES('$datetime','$username','$passwordHash','$admin')";
+                    VALUES('$datetime','$username','$password','$admin')";
                     
         if (mysqli_query($connection, $sql)) {
             $categorySucc = "New user Added Successfully!!";

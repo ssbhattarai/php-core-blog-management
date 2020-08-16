@@ -1,3 +1,34 @@
+<?php include_once("include/database.php"); ?>
+<?php include_once("include/functions.php"); ?>
+<?php
+    $loginError = '';
+    global $connection;
+    if(isset($_POST["submit"])){
+        $username = $_POST["username"];
+        $password = $_POST["password"];
+        $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+        
+        if(empty($username) || empty($password)){
+            $loginError = "All fields must be filled.";
+
+        }else{
+            $result = mysqli_query($connection,"SELECT * FROM admins WHERE username='$username' and password = '$password' limit 1");
+            print_r($result);
+            $count  = mysqli_num_rows($result);
+            echo $count;
+            if($count==0) {
+                $loginError = "Invalid Username or Password!";
+                echo $loginError;
+            } else {
+                $message = "You are successfully authenticated!";
+                echo $message;
+            }
+        }
+    }
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,7 +62,7 @@
 <div>
 <div class="container col col-sm-4 card mt-5 p-5">
 <h3>LOGIN</h3>
-<form>
+<form action="Login.php" method="post">
   <div class="form-group">
     <label for="username">Username</label>
     <input type="text" class="form-control" id="username" name="username">
