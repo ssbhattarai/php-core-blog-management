@@ -13,15 +13,11 @@
 
         }else{
             $result = mysqli_query($connection,"SELECT * FROM admins WHERE username='$username' and password = '$password' limit 1");
-            print_r($result);
             $count  = mysqli_num_rows($result);
-            echo $count;
             if($count==0) {
                 $loginError = "Invalid Username or Password!";
-                echo $loginError;
             } else {
-                $message = "You are successfully authenticated!";
-                echo $message;
+                redirect("admin/dashboard.php");
             }
         }
     }
@@ -61,6 +57,12 @@
 </nav>
 <div>
 <div class="container col col-sm-4 card mt-5 p-5">
+<?php if($loginError){ ?>
+<div class="alert alert-danger" role="alert">
+<?php echo $loginError; ?>
+</div>
+<?php } ?>
+
 <h3>LOGIN</h3>
 <form action="Login.php" method="post">
   <div class="form-group">
