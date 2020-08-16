@@ -45,7 +45,6 @@
 
 
 <body>
-    <div style="height:10px;background: #227b5a;"></div>
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 <div class="container">
@@ -83,8 +82,6 @@
   </div>
 </nav>
 
-
-<div style="height:10px;background: #227b5a;"></div>
 
 <div class="container">
     <h1>Full PHP BLOG CMS </h1>
