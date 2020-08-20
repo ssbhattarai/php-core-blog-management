@@ -199,8 +199,22 @@
 
     <!-- side of page -->
     <div class="offset-sm-1 col-sm-3">
-    <h2 style="text-align:center;">Categories</h2>
-    <ul class="list-group">
+    <div class="card mb-5">
+    <div class="card-header font-weight-bold text-center">
+            About Me
+    </div>
+    <img src="./static/auntorphoto.png" class="card-img-top" alt="authorimage-image">
+    <div class="card-body">
+      This is some text within a card body.
+      This is some text within a card body.This is some text within a card body.
+      This is some text within a card body.This is some text within a card body.
+    </div>
+  </div>
+    <div class="card border-primary text-white text-center" style="width: 15rem;">
+    <div class="card-header bg-primary font-weight-bold">
+            Categories
+    </div>
+  <ul class="list-group list-group-flush">
        <?php 
        $sql = "SELECT category_name FROM category ORDER BY datetime DESC";
        $res_data = $connection->query($sql);
@@ -208,13 +222,58 @@
                while($row = $res_data->fetch_assoc()) {
                    $cateogyName = $row['category_name']; ?>
             
-            <li class="list-group-item"><?php echo $cateogyName; ?></li>
+            <li class="list-group-item border-primary"><a href="blog.php?category=<?php echo $cateogyName; ?>"><?php echo $cateogyName; ?></a></li>
             <?php 
                 }} else {
                 echo "no Category to show";
             }
                    ?>
         </ul>
+  </ul>
+</div>
+
+
+<div class="card border-primary  mt-5" style="width: 20rem;">
+    <div class="card-header bg-primary font-weight-bold">
+            Latest Posts
+    </div>
+  <ul class="list-group list-group-flush">
+       <?php 
+       $sql = "SELECT * FROM blog ORDER BY datetime DESC limit 4";
+       $res_data = $connection->query($sql);
+           if($res_data->num_rows > 0) {
+               while($row = $res_data->fetch_assoc()) {
+                   $id = $row['id'];
+                   $title = $row['title'];
+                   $post_body = $row['post_body'];
+                   $category = $row['category'];
+                   $author = $row['author'];
+                   $image = $row['image'];
+                    ?>
+            
+            <li class="list-group-item">
+            <div class="card" style="width: 18rem;">
+            <img src="<?= $image ?>" class="card-img-top" alt="post-image">
+            <div class="card-body">
+              <h5 class="card-title font-weight-bold"><?php echo $title; ?></h5>
+              <p class="card-text">
+                <?php if(strlen($post_body) > 65){
+                  $post_body = substr($post_body,0,65). "...";
+                }
+                echo $post_body;?>
+              </p>
+              <a href="FullPost.php?id=<?php echo $id; ?>" class="btn btn-primary">view More</a>
+            </div>
+          </div>
+            </li>
+            <?php 
+                }} else {
+                echo "no Posts to show";
+            }
+                   ?>
+        </ul>
+  </ul>
+</div>
     </div>
   </div>
 </div>

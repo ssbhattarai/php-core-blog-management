@@ -77,6 +77,9 @@
       <li class="nav-item">
         <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="Login.php" tabindex="-1" aria-disabled="true">Admin Site</a>
+      </li>
     </ul>
     <form class="form-inline my-2 my-lg-0" action="blog.php" method="GET">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">

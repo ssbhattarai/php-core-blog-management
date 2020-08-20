@@ -1,3 +1,4 @@
+<?php include_once("include/functions.php"); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -46,6 +47,6 @@
 </nav>
 <div style="height:10px;background: #227b5a;"></div>
 
-
+<?php redirect("blog.php");?>
 </body>
 </html>
