@@ -1,5 +1,6 @@
 <?php include_once("include/database.php"); ?>
 <?php include_once("include/functions.php"); ?>
+<?php include_once("include/Sessions.php"); ?>
 <?php
     $loginError = '';
     global $connection;
@@ -9,15 +10,15 @@
         $passwordHash = password_hash($password, PASSWORD_DEFAULT);
         
         if(empty($username) || empty($password)){
-            $loginError = "All fields must be filled.";
-
+          $_SESSION["ErrorMessage"] = "All Filled must be filled out";
         }else{
-            $result = mysqli_query($connection,"SELECT * FROM admins WHERE username='$username' and password = '$password' limit 1");
-            $count  = mysqli_num_rows($result);
-            if($count==0) {
-                $loginError = "Invalid Username or Password!";
-            } else {
+            $foundAccount = login_attempt($username, $password);
+            if($foundAccount){
+                $_SESSION["succMessage"] = "You Are Loged in.";
                 redirect("admin/dashboard.php");
+            }else {
+              $_SESSION["ErrorMessage"] = "Invalid Username/Password";
+              redirect("Login.php");
             }
         }
     }
@@ -57,9 +58,12 @@
 </nav>
 <div>
 <div class="container col col-sm-4 card mt-5 p-5">
-<?php if($loginError){ ?>
-<div class="alert alert-danger" role="alert">
-<?php echo $loginError; ?>
+<?php if($_SESSION["ErrorMessage"]){ ?>
+<div class="alert alert-danger alert-dismissible" role="alert">
+  <Strong><?php echo Message(); ?> </Strong>
+<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
 </div>
 <?php } ?>
 

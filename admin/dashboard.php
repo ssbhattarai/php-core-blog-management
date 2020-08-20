@@ -1,5 +1,6 @@
 <?php include_once( '../include/database.php'); ?>
 <?php include_once( '../include/functions.php'); ?>
+<?php include_once( '../include/Sessions.php'); ?>
 <?php 
     global $connection;
     $dataError='';
@@ -98,6 +99,14 @@
 			</div>
 			<!-- ending of side area-->
 			<div class="col-sm-10">
+				<?php if($_SESSION["succMessage"]){ ?>
+					<div class="alert alert-success alert-dismissible mt-4">
+						<?php echo successMessage(); ?>
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					</div>
+				<?php } ?>
 				<h1>Admin Dashboard </h1>
 				<div class="table-responsive">
 					<table class="table table-striped table-hover text-center">
