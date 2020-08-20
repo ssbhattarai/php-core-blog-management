@@ -1,5 +1,7 @@
 <?php  require_once("../include/database.php")?>
 <?php  require_once("../include/functions.php")?>
+<?php include_once( '../include/Sessions.php'); ?>
+<?php confirm_login(); ?>
 
 <?php 
     $categoryErr = "";

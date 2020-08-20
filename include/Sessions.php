@@ -1,3 +1,4 @@
+<?php include_once("functions.php"); ?>
 <?php 
     session_start();
 
@@ -14,6 +15,19 @@
             $output = htmlentities($_SESSION["succMessage"]);
             $_SESSION["succMessage"] = null;
             return $output;
+        }
+    }
+
+    function login(){
+        if(isset($_SESSION["user_id"])){
+            return true;
+        }
+    }
+
+    function confirm_login(){
+        if(!login()){
+            $_SESSION["ErrorMessage"] = "Login Required";
+            redirect("../Login.php");
         }
     }
 

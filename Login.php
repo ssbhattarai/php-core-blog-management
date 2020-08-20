@@ -13,8 +13,12 @@
           $_SESSION["ErrorMessage"] = "All Filled must be filled out";
         }else{
             $foundAccount = login_attempt($username, $password);
+
+            $_SESSION["user_id"] = $foundAccount["id"];
+            $_SESSION["Username"] = $foundAccount["username"];
+
             if($foundAccount){
-                $_SESSION["succMessage"] = "You Are Loged in.";
+                $_SESSION["succMessage"] = "Welcome {$_SESSION["Username"]}.";
                 redirect("admin/dashboard.php");
             }else {
               $_SESSION["ErrorMessage"] = "Invalid Username/Password";
