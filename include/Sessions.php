@@ -21,6 +21,7 @@
     function login(){
         if(isset($_SESSION["user_id"])){
             return true;
+
         }
     }
 
@@ -28,6 +29,8 @@
         if(!login()){
             $_SESSION["ErrorMessage"] = "Login Required";
             redirect("../Login.php");
+        }else{
+            // redirect("admin/dashboard.php");
         }
     }
 

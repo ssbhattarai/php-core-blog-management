@@ -6,7 +6,7 @@
 <?php 
     $postErr = "";
     $postSucc = "";
-
+    global $connection;
     $unapproveCommentCount = "SELECT count(*) as upapproveComment from comments where status='Pending'";
 	$count = $connection->query($unapproveCommentCount);
 
@@ -17,6 +17,9 @@
         $title = $_POST["title"]; 
         $category = $_POST["category"]; 
         $post_body = $_POST["post_body"]; 
+        $postall = mysqli_real_escape_string($connection, $post_body);
+
+       
 
         // for Created Date time
         date_default_timezone_get();
@@ -52,7 +55,7 @@
             if (move_uploaded_file($_FILES['Image']['tmp_name'], $target_file)) {
 
                 $sql = "INSERT INTO blog(datetime,title,category,author,image,post_body)
-                        VALUES('$datetime','$title','$category','$author','$image','$post_body')";
+                        VALUES('$datetime','$title','$category','$author','$image','$postall')";
                 
                 if (mysqli_query($connection, $sql)) {
                     
@@ -183,7 +186,7 @@
                     </div>
                     <div class="form-group">
                         <label for="post" class="form-name">Post</label>
-                        <textarea class="form-control" id="post"  name="post_body"></textarea>
+                        <textarea class="form-control" id="post"  name="post_body" rows="15"></textarea>
                     </div>
                     <button type="submit" class="btn btn-success btn-lg" name="submit">Add New Post</button>
                 </form>

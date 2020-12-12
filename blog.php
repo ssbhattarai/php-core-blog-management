@@ -48,8 +48,6 @@
 </head>
 
 <body>
-    <div style="height:10px;background: #227b5a;"></div>
-
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 <div class="container">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
@@ -68,7 +66,7 @@
       <li class="nav-item active">
         <a class="nav-link" href="blog.php">Blog</a>
       </li>
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <a class="nav-link" href="#">About</a>
       </li>
       <li class="nav-item">
@@ -76,7 +74,7 @@
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-      </li>
+      </li> -->
       <li class="nav-item">
         <a class="nav-link" href="Login.php" tabindex="-1" aria-disabled="true">Admin Site</a>
       </li>
@@ -88,8 +86,6 @@
   </div>
   </div>
 </nav>
-
-<div style="height:10px;background: #227b5a;"></div>
 
 
 <div class="container">
@@ -108,7 +104,7 @@
             }
             while($row = $result->fetch_assoc()){
                 $image= $row["image"];
-    
+  
             ?> 
     <div class="card shadow p-3 mb-5 bg-dark text-light rounded">
         <img src="<?= $image ?>" class="card-img-top img-thumbnail rounded float-left" alt="..." >
@@ -223,6 +219,5 @@
             <p> | &copy; | 2020 <a href="https://sambhattarai.com.np" target="_blank">SAMBHATTARAI</a> All Right Reserved</p>
         <hr>
    </div>
-   <div style="height:10px; background-color: #283b5f"></div>
 </body>
 </html>
