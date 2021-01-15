@@ -99,7 +99,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-2">
-                <h1>shyam</h1>
+                <h1 class="text-primary text-center">DASH</h1>
                 <ul id="side_menu" class="nav flex-column nav-pills">
                     <li class="nav-item">
                         <a class="nav-link" href="dashboard.php">
@@ -139,7 +139,13 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="contacts.php">
+                            <i class="fa fa-phone" aria-hidden="true"></i>
+                            &nbsp;Contacts
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Logout.php">
                             <i class="fa fa-sign-out" aria-hidden="true"></i>
                             &nbsp;Logout
                         </a>

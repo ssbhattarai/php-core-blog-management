@@ -5,8 +5,5 @@
     $database = "blogphpcms";
     $connection = mysqli_connect($host, $username, $pass, $database);
 
-    // if($con){
-    //     echo "i am connected";
-    // }
 
 ?>

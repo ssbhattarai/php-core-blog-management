@@ -68,7 +68,7 @@
         <div class="row">
 
             <div class="col-sm-2">
-                <h1>shyam</h1>
+            <h1 class="text-primary text-center">DASH</h1>
                 <ul id="side_menu" class="nav flex-column nav-pills">
                     <li class="nav-item">
                         <a class="nav-link" href="dashboard.php">
@@ -108,7 +108,13 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="contacts.php">
+                            <i class="fa fa-phone" aria-hidden="true"></i>
+                            &nbsp;Contacts
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Logout.php">
                             <i class="fa fa-sign-out" aria-hidden="true"></i>
                             &nbsp;Logout
                         </a>
@@ -182,13 +188,15 @@
                                 <th scope="col">Category </th>
                                 <th scope="col">Created Date</th>
                                 <th scope="col">Creator Name</th>
+                                <th scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody>
                         <?php 
                         if($res_data->num_rows > 0) {
                             while($row = $res_data->fetch_assoc()) {
-                                echo "<tr><td>{$row['id']}</td><td>{$row['category_name']}</td><td>{$row['datetime']}</td><td>{$row['creatorname']}</td></tr>\n";
+                                echo "<tr><td>{$row['id']}</td><td>{$row['category_name']}</td><td>{$row['datetime']}</td><td>{$row['creatorname']}</td>
+                                <td><a href='DeleteCategory.php?Delete={$row['id']}'><button class='btn btn-danger'>Delete</button></a></td></tr>\n";
                             }
                         } else {
                             $dataErr = "No data To display";

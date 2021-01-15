@@ -3,7 +3,7 @@
 <?php 
     global $connection;
     $searchresult = "";
-
+    
    
     if(isset($_GET['postsearch'])) {
         $search = mysqli_real_escape_string($connection, htmlspecialchars($_GET['search']));
@@ -23,6 +23,7 @@
         $sql = "SELECT * FROM blog WHERE id= $idOfURL";
     }
     $result = $connection->query($sql);
+
 ?>
 
 <?php 
@@ -97,18 +98,26 @@
             // if(mysqli_num_rows($result) <= 0){
             //     $searchresult = "NO Post To Show";
             // }
+            $idOfURL = $_GET["id"];  //getid of url
+            $view = "UPDATE blog SET views=views + '1' WHERE id='$idOfURL'";
+            $connection->query($view);
+
+           
             while($row = $result->fetch_assoc()){
                 $image= $row["image"];
     
             ?> 
     <div class="card shadow p-3 mb-5 bg-dark text-light rounded">
-        <img src="<?= $image ?>" class="card-img-top img-thumbnail rounded float-left" alt="..." >
+        <img src="<?= $image ?>" class="card-img-top img-thumbnail rounded float-left" alt="Post Image" >
         <div class="card-body">
             <h5 class="card-title" style="font-weight: bold; color: #7bea42;"><?php echo htmlentities($row['title']) ?></h5>
             <div class="row row-cols-1 row-cols-sm-2">
-                <div class="col small-color">Category: <?php echo htmlentities($row["category"])?></div>
+                <div class="col small-color">Category: <span class="text-bold"><?php echo htmlentities($row["category"])?></span></div>
                 <div class="col small-color">Published on: <?php echo htmlentities($row["datetime"])?></div>
+                <div class=" col small-color">  Views: <?php echo htmlentities($row["views"])?></div>
+
             </div>
+            <br>
             <p class="card-text">
                 <?php 
                 echo htmlentities($row["post_body"]); ?></p>
@@ -150,6 +159,7 @@
                   }
               }
               $comments = "SELECT * FROM comments WHERE blog_id=$postid and status= 'Approve'";
+              
               $allComments = $connection->query($comments);
         ?>
         <h4>Comments: </h4>
@@ -216,6 +226,7 @@
     </div>
   <ul class="list-group list-group-flush">
        <?php 
+
        $sql = "SELECT category_name FROM category ORDER BY datetime DESC";
        $res_data = $connection->query($sql);
            if($res_data->num_rows > 0) {

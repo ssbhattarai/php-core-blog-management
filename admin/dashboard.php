@@ -31,7 +31,6 @@
 </head>
 
 <body>
-	<div style="height:10px;background: #227b5a;"></div>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<div class="container">
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span>
@@ -57,13 +56,10 @@
 			</div>
 		</div>
 	</nav>
-	<div style="height:10px;background: #227b5a;"></div>
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-sm-2">
-				<br>
-				<br>
-				<br>
+			<div class="col-sm-2 mt-2">
+			<h1 class="text-primary text-center">DASH</h1>
 				<ul id="side_menu" class="nav flex-column nav-pills">
 					<li class="nav-item">
 						<a class="nav-link active" href="dashboard.php"> <i class="fa fa-tachometer" aria-hidden="true"></i>
@@ -93,7 +89,13 @@
 							&nbsp;Live Blog</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#"> <i class="fa fa-sign-out" aria-hidden="true"></i>
+                        <a class="nav-link" href="contacts.php">
+                            <i class="fa fa-phone" aria-hidden="true"></i>
+                            &nbsp;Contacts
+                        </a>
+                    </li>
+					<li class="nav-item">
+						<a class="nav-link" href="Logout.php"> <i class="fa fa-sign-out" aria-hidden="true"></i>
 							&nbsp;Logout</a>
 					</li>
 				</ul>
@@ -108,7 +110,7 @@
 					</button>
 					</div>
 				<?php } ?>
-				<h1>Admin Dashboard </h1>
+				<h5 class="m-3 text-center">Admin Dashboard </h5>
 				<div class="table-responsive">
 					<table class="table table-striped table-hover text-center">
 						<thead>
@@ -197,13 +199,13 @@
 		<!-- ending  of row-->
 	</div>
 	<!-- ennd containger-->
-	<div id="footer">
+	<div id="footer" class="mt-5">
 		<!-- Footer div -->
 		<hr>
 		<p>| &copy; | 2020 <a href="https://sambhattarai.com.np" target="_blank">SAMBHATTARAI</a> All Right Reserved</p>
 		<hr>
 	</div>
-	<div style="height:10px; background-color: #283b5f"></div>
+	<div style="height:5px; background-color: #283b5f"></div>
 </body>
 
 </html>

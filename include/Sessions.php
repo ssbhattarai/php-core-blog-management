@@ -1,7 +1,7 @@
 <?php include_once("functions.php"); ?>
 <?php 
     session_start();
-
+    // To display the session message
     function Message(){
         if(isset($_SESSION["ErrorMessage"])){
             $output = htmlentities($_SESSION["ErrorMessage"]);
