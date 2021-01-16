@@ -109,7 +109,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-2">
-            <h1 class="text-primary text-center">DASH</h1>
+            <h1 class="text-white text-center">DASH</h1>
                 <ul id="side_menu" class="nav flex-column nav-pills">
                 <br><br><br>
                     <li class="nav-item">
@@ -138,15 +138,13 @@
                         </a>
                     </li>
                     <li class="nav-item">
+						<a class="nav-link" href="aboutus.php"> <i class="fa fa-info" aria-hidden="true"></i>
+							&nbsp;About Us</a>
+					</li>
+                    <li class="nav-item">
                         <a class="nav-link" href="#">
                             <i class="fa fa-comments" aria-hidden="true"></i>
                             &nbsp;Comments
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <i class="fa fa-rss" aria-hidden="true"></i>
-                            &nbsp;Live Blog
                         </a>
                     </li>
                     <li class="nav-item">
@@ -155,6 +153,7 @@
                             &nbsp;Contacts
                         </a>
                     </li>
+                    
                     <li class="nav-item">
                         <a class="nav-link" href="Logout.php">
                             <i class="fa fa-sign-out" aria-hidden="true"></i>
@@ -168,7 +167,7 @@
 
 
             <div class="col-sm-10">
-                <h1>Add New Post </h1>
+                <h1 class="m-3 text-center">Add New Post </h1>
                 <?php if($postErr){ ?>
                 <div class="alert alert-danger" role="alert">
                     <?php echo $postErr; ?>
@@ -179,7 +178,7 @@
                     <?php echo $postSucc; ?>
                 </div>
                 <?php  } ?>
-                <form action="EditPost.php?Edit=<?php echo $urlId; ?>" method="post" enctype="multipart/form-data">
+                <form action="EditPost.php?Edit=<?php echo $urlId; ?>" method="post" enctype="multipart/form-data" class="m-5">
                     <div class="form-group">
                         <label for="title" class="form-name">Title</label>
                         <input type="text" class="form-control" id="title" aria-describedby="emailHelp" name="title" value="<?php echo $title ?>">

@@ -30,33 +30,6 @@
 </head>
 
 <body>
-	<div style="height:10px;background: #227b5a;"></div>
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-		<div class="container">
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-				<div class="nav-header">
-					<a href="index.php" style="argin: -6px;margin-right: 10px;">
-						<img src="../static/sundarBlog.png" alt="sundarblog" style="width:8em;">
-					</a>
-				</div>
-				<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-					<li class="nav-item active"> <a class="nav-link" href="../index.php">Home</a>
-					</li>
-					<li class="nav-item"> <a class="nav-link" href="../blog.php" target="_blank">Blog</a>
-					</li>
-					<li class="nav-item"> <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-					</li>
-				</ul>
-				<!-- <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form> -->
-			</div>
-		</div>
-	</nav>
-	<div style="height:10px;background: #227b5a;"></div>
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-sm-2">
@@ -81,15 +54,15 @@
 							&nbsp;Manage Admins</a>
 					</li>
 					<li class="nav-item">
+						<a class="nav-link" href="aboutus.php"> <i class="fa fa-info" aria-hidden="true"></i>
+							&nbsp;About Us</a>
+					</li>
+					<li class="nav-item">
 						<a class="nav-link active" href="Comments.php"> <i class="fa fa-comments" aria-hidden="true"></i>
 							&nbsp;Comments <?php while($countcom = $count->fetch_assoc()){
 								$unapprove = $countcom["upapproveComment"];
 							} ?>
 							<?php if($unapprove > 0){ ?><span class="badge badge-danger" style="float:right;"><?php echo $unapprove ?></span> <?php } ?></a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#"> <i class="fa fa-rss" aria-hidden="true"></i>
-							&nbsp;Live Blog</a>
 					</li>
 					<li class="nav-item">
                         <a class="nav-link" href="contacts.php">
@@ -105,8 +78,8 @@
 			</div>
 			<!-- ending of side area-->
 			<div class="col-sm-10">
-				<h1>Comments </h1>
-				<div class="table-responsive">
+				<h1 class="text-center m-5">Comments </h1>
+				<div class="table-responsive m-3">
 					<table class="table table-striped table-hover text-center">
 						<thead>
 							<tr>
@@ -128,7 +101,8 @@
                                  $email = $row["email"]; 
                                  $comments = $row["comment"]; 
                                  $publishedate = $row["datetime"]; 
-                                 $status = $row["status"]; 
+								 $status = $row["status"]; 
+								 $blog_id = $row["blog_id"]
                             ?>
 							<tr>
 								<th scope="row">
@@ -142,9 +116,7 @@
 									<?php echo $email; ?>
 								</td>
 								<td>
-									<?php if(strlen($comments) > 10){
-										$comments = substr($comments, 0,10). "..";
-									}
+									<?php
 									echo $comments; ?>
 								</td>
 								<td>
@@ -175,7 +147,7 @@
 									</a>
 								</td>
 								<td>
-									<a href="">
+									<a href="../FullPost.php?id=<?php echo $blog_id; ?>">
 										<button type="button" class="btn btn-info">View Post</button>
 									</a>
 								</td>

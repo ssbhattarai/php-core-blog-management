@@ -37,16 +37,12 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarTogglerDemo01">
 				<div class="nav-header">
-					<a href="index.php" style="argin: -6px;margin-right: 10px;">
-						<img src="../static/sundarBlog.png" alt="sundarblog" style="width:8em;">
-					</a>
+				<!-- <a href="index.php" style="argin: -6px;margin-right: 10px;" class="text-decoration-none text-white">
+               CMS
+            </a> -->
 				</div>
 				<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-					<li class="nav-item active"> <a class="nav-link" href="../index.php">Home</a>
-					</li>
-					<li class="nav-item"> <a class="nav-link" href="../blog.php" target="_blank">Blog</a>
-					</li>
-					<li class="nav-item"> <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+					<li class="nav-item active"> <a class="nav-link" href="../blog.php">Home</a>
 					</li>
 				</ul>
 				<!-- <form class="form-inline my-2 my-lg-0">
@@ -76,6 +72,10 @@
 					<li class="nav-item">
 						<a class="nav-link" href="admins.php"> <i class="fa fa-users" aria-hidden="true"></i>
 							&nbsp;Manage Admins</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="aboutus.php"> <i class="fa fa-info" aria-hidden="true"></i>
+							&nbsp;About Us</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="Comments.php"> <i class="fa fa-comments" aria-hidden="true"></i>
@@ -110,15 +110,14 @@
 					</button>
 					</div>
 				<?php } ?>
-				<h5 class="m-3 text-center">Admin Dashboard </h5>
-				<div class="table-responsive">
+				<h5 class="m-5 text-center">Admin Dashboard </h5>
+				<div class="table-responsive m-3">
 					<table class="table table-striped table-hover text-center">
 						<thead>
 							<tr>
 								<th scope="col">SN</th>
 								<th scope="col">Title</th>
 								<th scope="col">Banner</th>
-								<th scope="col">Published date</th>
 								<th scope="col">Category</th>
 								<th scope="col">Comments</th>
 								<th scope="col">Actions</th>
@@ -131,9 +130,9 @@
                                  $sn++;
                                  $id = $row["id"];
                                  $image= $row["image"]; 
-                                 $title = $row["title"]; 
-                                 $publishedate = $row["datetime"]; 
-                                 $category = $row["category"]; 
+                                 $title = $row["title"];  
+								 $category = $row["category"]; 
+								 $status = $row["status"]
                             ?>
 							<tr>
 								<th scope="row">
@@ -147,9 +146,6 @@
                                         </td>
 								<td>
 									<img src="<?= $image ?>" alt="banner" style="height:60px; width:130px;">
-								</td>
-								<td>
-									<?php echo $publishedate ?>
 								</td>
 								<td>
 									<?php echo $category ?>
@@ -176,17 +172,23 @@
 									?>
 								</td>
 								<td>
+								<?php if($status) { ?>
+											<a href="NotPublishedPost.php?id=<?php echo $id; ?>">
+                                            <button type="button" class="btn btn-success">Published</button>
+											</a>
+                                        <?php } ?>
+										<?php if(!$status) { ?>
+											<a href="PublishedPost.php?id=<?php echo $id; ?>">
+                                            <button type="button" class="btn btn-warning">Not Published</button>
+											</a>
+                                        <?php } ?>
 									<a href="EditPost.php?Edit=<?php echo $id ?>">
-										<button type="button" class="btn btn-success">Edit</button>
-									</a>
-									<a href="DeletePost.php?Delete=<?php echo $id ?>">
-										<button type="button" class="btn btn-danger">Delete</button>
+										<button type="button" class="btn btn-primary">Edit</button>
 									</a>
 								</td>
 								<td>
-									<a href="../FullPost.php?id=<?php echo $id ?>">
-										<button type="button" class="btn btn-info">View Post</button>
-									</a>
+								
+									
 								</td>
 							</tr>
 							<?php } ?>

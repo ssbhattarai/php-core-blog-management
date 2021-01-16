@@ -32,6 +32,8 @@
       $sql = "SELECT * FROM blog Where status=1 ORDER BY datetime DESC";
     }
     $result = $connection->query($sql);
+
+    
 ?>
 
 <!DOCTYPE html>
@@ -92,6 +94,8 @@
     <div class="alert alert-dark mt-3 text-center" role="alert">
       <strong>Full PHP BLOG CMS </strong>
     </div>
+    
+
     <div class="row">
       <div class="col-sm-8">
         <?php if($searchresult) { ?>
@@ -120,8 +124,9 @@
               <?php if(strlen($row['post_body']) > 150){
                     $post = substr($row["post_body"], 0, 150) . '...';
 
+                    echo htmlentities($post); 
                 }
-                echo htmlentities($post); ?>
+                    ?>
             </p>
             <a href="FullPost.php?id=<?php echo $row["id"] ?>" class="btn btn-success">View More &rsaquo;&rsaquo;</a>
           </div>
@@ -163,8 +168,56 @@
         </div>
 
 
+       <div class="card border-primary  mt-5 mb-5" style="width: 20rem;">
+        <div class="card-header bg-primary font-weight-bold text-white text-center">
+            Most Viwed Posts
+          </div>
+          <ul class="list-group list-group-flush">
+            <?php 
+       $sql = "SELECT * FROM blog Where status = 1 ORDER BY views DESC limit 4";
+       $res_data = $connection->query($sql);
+           if($res_data->num_rows > 0) {
+               while($row = $res_data->fetch_assoc()) {
+                   $id = $row['id'];
+                   $title = $row['title'];
+                   $post_body = $row['post_body'];
+                   $category = $row['category'];
+                   $author = $row['author'];
+                   $image = $row['image'];
+                   $status = $row['status'];
+                    ?>
+  <?php if($row['status']){ ?>
+            <li class="list-group-item">
+              <div class="card" style="width: 18rem;">
+                <img src="<?= $image ?>" class="card-img-top" alt="post-image">
+                <div class="card-body">
+                  <h5 class="card-title font-weight-bold"><?php echo $title; ?></h5>
+                  <p class="card-text">
+                    <?php if(strlen($post_body) > 65){
+                  $post_body = substr($post_body,0,65). "...";
+                }
+                echo $post_body;?>
+                  </p>
+                  <a href="FullPost.php?id=<?php echo $id; ?>" class="btn btn-primary">view More</a>
+                </div>
+              </div>
+            </li>
+            <?php 
+                }}} else {
+               
+            
+                   ?>
+            <span class="text-center p-2 font-weight-bold">
+              No post to show
+            </span>
+            <?php } ?>
+          </ul>
+          </ul>
+        </div>
+
+
         <div class="card border-primary  mt-5 mb-5" style="width: 20rem;">
-          <div class="card-header bg-primary font-weight-bold text-white text-center">
+        <div class="card-header bg-primary font-weight-bold text-white text-center">
             Latest Posts
           </div>
           <ul class="list-group list-group-flush">

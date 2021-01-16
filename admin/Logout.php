@@ -8,6 +8,9 @@
 $_SESSION["user_id"]==null;
 
 session_destroy();
+
+session_start();
+$_SESSION["ErrorMessage"] = "You Logged out";
 redirect('../Login.php');
 
 ?>

@@ -24,7 +24,7 @@
   <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
     <div class="nav-header">
             <a href="index.php" style="argin: -6px;margin-right: 10px;">
-                <img src="static/sundarBlog.png" alt="sundarblog" style="width:8em;">
+                <!-- <img src="static/sundarBlog.png" alt="sundarblog" style="width:8em;"> -->
             </a>
     </div>
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">

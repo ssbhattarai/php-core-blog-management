@@ -126,18 +126,16 @@
                         </a>
                     </li>
                     <li class="nav-item">
+						<a class="nav-link" href="aboutus.php"> <i class="fa fa-info" aria-hidden="true"></i>
+							&nbsp;About Us</a>
+					</li>
+                    <li class="nav-item">
 						<a class="nav-link" href="Comments.php"> <i class="fa fa-comments" aria-hidden="true"></i>
 							&nbsp;Comments <?php while($countcom = $count->fetch_assoc()){
 								$unapprove = $countcom["upapproveComment"];
 							} ?>
 							<?php if($unapprove > 0){ ?><span class="badge badge-danger" style="float:right;"><?php echo $unapprove ?></span> <?php } ?></a>
 					</li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <i class="fa fa-rss" aria-hidden="true"></i>
-                            &nbsp;Live Blog
-                        </a>
-                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="contacts.php">
                             <i class="fa fa-phone" aria-hidden="true"></i>
@@ -153,7 +151,7 @@
                 </ul>
             </div> <!-- ending of side area-->
             <div class="col-sm-10">
-                <h1>Add New Post </h1>
+                <h1 class="text-center m-5">Add New Post </h1>
                 <?php if($postErr){ ?>
                 <div class="alert alert-danger" role="alert">
                     <?php echo $postErr; ?>
@@ -164,7 +162,7 @@
                     <?php echo $postSucc; ?>
                 </div>
                 <?php  } ?>
-                <form action="AddNewPost.php" method="post" enctype="multipart/form-data">
+                <form action="AddNewPost.php" method="post" enctype="multipart/form-data" class="m-5">
                     <div class="form-group">
                         <label for="title" class="form-name">Title</label>
                         <input type="text" class="form-control" id="title" aria-describedby="emailHelp" name="title">

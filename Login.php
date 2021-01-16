@@ -4,6 +4,7 @@
 <?php
     $loginError = '';
     global $connection;
+    // $_SESSION["ErrorMessage"] = "";
     if(isset($_POST["submit"])){
         $username = $_POST["username"];
         $password = $_POST["password"];
@@ -20,7 +21,9 @@
             if($foundAccount){
                 $_SESSION["succMessage"] = "Welcome {$_SESSION["Username"]}.";
                 redirect("admin/dashboard.php");
-            }else {
+            }
+            if(!$foundAccount) {
+
               $_SESSION["ErrorMessage"] = "Invalid Username/Password";
               redirect("Login.php");
             }
@@ -53,8 +56,8 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
     <div class="nav-header">
-            <a href="index.php" style="argin: -6px;margin-right: 10px;">
-                <img src="static/sundarBlog.png" alt="sundarblog" style="width:8em;">
+            <a href="index.php" style="argin: -6px;margin-right: 10px;" class="text-decoration-none text-white">
+               CMS
             </a>
     </div>
   </div>
@@ -62,6 +65,8 @@
 </nav>
 <div>
 <div class="container col col-sm-4 card mt-5 p-5">
+
+
 <?php if($_SESSION["ErrorMessage"]){ ?>
 <div class="alert alert-danger alert-dismissible" role="alert">
   <Strong><?php echo Message(); ?> </Strong>

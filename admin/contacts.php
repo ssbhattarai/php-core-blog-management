@@ -6,7 +6,7 @@
     global $connection;
     $dataError='';
     $sn=0 ;
-    $sql="SELECT * FROM blog ORDER BY datetime DESC" ;
+    $sql="SELECT * FROM contacts ORDER BY datetime DESC" ;
     $result=$connection->query($sql);
 
 
@@ -31,38 +31,13 @@
 </head>
 
 <body>
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-		<div class="container">
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-				<div class="nav-header">
-					<a href="index.php" style="argin: -6px;margin-right: 10px;">
-						<img src="../static/sundarBlog.png" alt="sundarblog" style="width:8em;">
-					</a>
-				</div>
-				<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-					<li class="nav-item active"> <a class="nav-link" href="../index.php">Home</a>
-					</li>
-					<li class="nav-item"> <a class="nav-link" href="../blog.php" target="_blank">Blog</a>
-					</li>
-					<li class="nav-item"> <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-					</li>
-				</ul>
-				<!-- <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form> -->
-			</div>
-		</div>
-	</nav>
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-sm-2 mt-2">
 			<h1 class="text-primary text-center">DASH</h1>
 				<ul id="side_menu" class="nav flex-column nav-pills">
 					<li class="nav-item">
-						<a class="nav-link active" href="dashboard.php"> <i class="fa fa-tachometer" aria-hidden="true"></i>
+						<a class="nav-link" href="dashboard.php"> <i class="fa fa-tachometer" aria-hidden="true"></i>
 							&nbsp;Dashboard</a>
 					</li>
 					<li class="nav-item">
@@ -78,6 +53,10 @@
 							&nbsp;Manage Admins</a>
 					</li>
 					<li class="nav-item">
+						<a class="nav-link" href="aboutus.php"> <i class="fa fa-info" aria-hidden="true"></i>
+							&nbsp;About Us</a>
+					</li>
+					<li class="nav-item">
 						<a class="nav-link" href="Comments.php"> <i class="fa fa-comments" aria-hidden="true"></i>
 							&nbsp;Comments <?php while($countcom = $count->fetch_assoc()){
 								$unapprove = $countcom["upapproveComment"];
@@ -89,7 +68,7 @@
 							&nbsp;Live Blog</a>
 					</li>
 					<li class="nav-item">
-                        <a class="nav-link" href="contacts.php">
+                        <a class="nav-link active" href="contacts.php">
                             <i class="fa fa-phone" aria-hidden="true"></i>
                             &nbsp;Contacts
                         </a>
@@ -110,19 +89,16 @@
 					</button>
 					</div>
 				<?php } ?>
-				<h5 class="m-3 text-center">Admin Dashboard </h5>
+				<h4 class="m-5 text-center">All Contacts </h4>
 				<div class="table-responsive">
 					<table class="table table-striped table-hover text-center">
 						<thead>
 							<tr>
 								<th scope="col">SN</th>
+								<th scope="col">Name</th>
 								<th scope="col">Title</th>
-								<th scope="col">Banner</th>
-								<th scope="col">Published date</th>
-								<th scope="col">Category</th>
-								<th scope="col">Comments</th>
-								<th scope="col">Actions</th>
-								<th scope="col">Details</th>
+								<th scope="col">Description </th>
+								<th scope="col">Read Status</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -130,63 +106,36 @@
                              while( $row=$result->fetch_assoc() ){ 
                                  $sn++;
                                  $id = $row["id"];
-                                 $image= $row["image"]; 
+                                 $first_name= $row["first_name"]; 
+                                 $last_name= $row["last_name"]; 
                                  $title = $row["title"]; 
-                                 $publishedate = $row["datetime"]; 
-                                 $category = $row["category"]; 
+                                 $description = $row["description"]; 
+                                 $status = $row["is_read"]; 
                             ?>
 							<tr>
 								<th scope="row">
 									<?php echo $sn ?>
 								</th>
 								<td>
-									<?php if(strlen($title)>20 ){
-                                         $title = substr($title,0,20). '...'; 
-                                         } 
-                                         echo $title ?>
+									<?php echo $first_name. ' '. $last_name ?>
+								</td>
+								<td>
+									<?php  echo $title ?>
                                         </td>
 								<td>
-									<img src="<?= $image ?>" alt="banner" style="height:60px; width:130px;">
+									<?php echo $description ?>
 								</td>
 								<td>
-									<?php echo $publishedate ?>
-								</td>
-								<td>
-									<?php echo $category ?>
-								</td>
-								<td>
-									<?php 
-										// For Pending Comments
-										global $connection;
-										$Count=mysqli_query($connection,"SELECT count(*) as total from comments where blog_id='$id' and status = 'Pending'");
-										$data=mysqli_fetch_assoc($Count);
-										if($data["total"] > 0){
-											echo "<span class='badge badge-danger'>".$data['total'] ."</span>";
-										}
-										
-									?>
-									<?php 
-										// For Approve Comments
-										global $connection;
-										$CountApprove=mysqli_query($connection,"SELECT count(*) as total from comments where blog_id='$id' and status = 'Approve'");
-										$dataApprove=mysqli_fetch_assoc($CountApprove);
-										if($dataApprove["total"] > 0){
-											echo "<span class='badge badge-success'>".$dataApprove['total'] ."</span>";
-										}
-									?>
-								</td>
-								<td>
-									<a href="EditPost.php?Edit=<?php echo $id ?>">
-										<button type="button" class="btn btn-success">Edit</button>
-									</a>
-									<a href="DeletePost.php?Delete=<?php echo $id ?>">
-										<button type="button" class="btn btn-danger">Delete</button>
-									</a>
-								</td>
-								<td>
-									<a href="../FullPost.php?id=<?php echo $id ?>">
-										<button type="button" class="btn btn-info">View Post</button>
-									</a>
+								<?php if($status) { ?>
+											<a href="#">
+                                            <button type="button" class="btn btn-success" disabled>Already Read</button>
+											</a>
+                                        <?php } ?>
+										<?php if(!$status) { ?>
+											<a href="ReadContact.php?id=<?php echo $id; ?>">
+                                            <button type="button" class="btn btn-warning">Make Read</button>
+											</a>
+                                        <?php } ?>
 								</td>
 							</tr>
 							<?php } ?>

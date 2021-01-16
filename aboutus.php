@@ -3,32 +3,9 @@
 <?php include_once( './include/Sessions.php'); ?>
 <?php 
     global $connection;
-    $contactSuccess=  '';
-    if (isset($_POST["submit"])){
-
-        $first_name = $_POST["first_name"]; 
-        $last_name = $_POST["last_name"]; 
-        $title = $_POST["title"]; 
-        $description = $_POST["description"]; 
-
-         // for Created Date time
-         date_default_timezone_get();
-         $current_time = time();
-         $datetime = strftime("%B-%d-%Y %H:%M:%S");
+    $aboutSuccess=  '';
 
 
-         $sql = "INSERT INTO contacts(first_name,last_name,title,description,datetime)
-                        VALUES('$first_name','$last_name','$title','$description','$datetime')";
-
-        if (mysqli_query($connection, $sql)) {
-                    
-          $contactSuccess = "Data send Successfully!!";
-          
-          redirect("contact.php");
-      } else {
-          echo "Error: " . $sql . "" . mysqli_error($connection);
-      }
-    }
 ?>
 
 <!DOCTYPE html>
@@ -90,17 +67,24 @@
       <strong>Full PHP BLOG CMS </strong>
     </div>
     <div class="card m-5">
-    <?php if($contactSuccess) { ?>
-    <div class="alert alert-success text-center" role="alert">
-    <?php echo $contactSuccess; ?>
-</div>
-<?php } ?>
+  
     <div class="card-header text-center">About us</div>
   <div class="card-body">
-        <h2>Title</h2> <br>
-        Description
+  <?php 
+ $sql = "SELECT * FROM about_us ORDER BY id DESC limit 1";
+ $res_data = $connection->query($sql);
+         while($row = $res_data->fetch_assoc()) {
+             $id = $row['id'];
+             $title = $row['title'];
+             $body = $row['body'];
+              
+  
+?>
+<h2><?php echo $title; ?></h2> <br>
+          <?php echo $body; ?>
 
- 
+ <?php   }
+   ?>
   </div>
 </div>
   </div>

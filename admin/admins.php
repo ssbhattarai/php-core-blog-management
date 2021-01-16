@@ -102,18 +102,16 @@
                         </a>
                     </li>
                     <li class="nav-item">
+						<a class="nav-link" href="aboutus.php"> <i class="fa fa-info" aria-hidden="true"></i>
+							&nbsp;About Us</a>
+					</li>
+                    <li class="nav-item">
 						<a class="nav-link" href="Comments.php"> <i class="fa fa-comments" aria-hidden="true"></i>
 							&nbsp;Comments <?php while($countcom = $count->fetch_assoc()){
 								$unapprove = $countcom["upapproveComment"];
 							} ?>
 							<?php if($unapprove > 0){ ?><span class="badge badge-danger" style="float:right;"><?php echo $unapprove ?></span> <?php } ?></a>
 					</li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <i class="fa fa-rss" aria-hidden="true"></i>
-                            &nbsp;Live Blog
-                        </a>
-                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="contacts.php">
                             <i class="fa fa-phone" aria-hidden="true"></i>
@@ -131,7 +129,7 @@
 
 
             <div class="col-sm-10">
-                <h1>Manage Category </h1>
+                <h1 class="text-center m-5">Manage Category </h1>
                 <?php if($adminErr){ ?>
                 <div class="alert alert-danger" role="alert">
                     <?php echo $adminErr; ?>
@@ -155,12 +153,12 @@
                         <label for="confirmPassword" class="form-name">Confirm Password</label>
                         <input type="password" class="form-control" id="confirmPassword" name="confirm_password">
                     </div>
-                    <button type="submit" class="btn btn-success btn-lg" name="submit">Add User</button>
+                    <button type="submit" class="btn btn-success btn-lg" name="submit">Add Admin</button>
                 </form>
 
 
                 <!-- Category Table -->
-                <h4 style="margin-top: 20px;text-align:center; font-weight:bold;" > Admins Table </h4>
+                <h4 style="margin-top: 50px;text-align:center; font-weight:bold;" > Admins Table </h4>
                 <div style="margin-top: 26px;" class="table-responsive">
                     
                     <?php 

@@ -54,8 +54,8 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
     <div class="nav-header">
-            <a href="index.php" style="argin: -6px;margin-right: 10px;">
-                <img src="static/sundarBlog.png" alt="sundarblog" style="width:8em;">
+            <a href="index.php" class="text-white text-decoration-none" style="argin: -6px;margin-right: 10px;">
+                CMS
             </a>
     </div>
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
@@ -64,16 +64,15 @@
       </li>
       <li class="nav-item active">
         <a class="nav-link" href="blog.php">Blog</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">About</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Contact</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-      </li>
+      </li> <li class="nav-item">
+            <a class="nav-link" href="contact.php">Contact</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="aboutus.php">About Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="Login.php" tabindex="-1" aria-disabled="true">Admin Site</a>
+          </li>
     </ul>
     <form class="form-inline my-2 my-lg-0" action="blog.php" method="GET">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
@@ -85,8 +84,9 @@
 
 
 <div class="container">
-    <h1>Full PHP BLOG CMS </h1>
-    <p>Made by Sundar</p>
+<div class="alert alert-dark mt-3 text-center" role="alert">
+      <strong>Full PHP BLOG CMS </strong>
+    </div>
     <div class="row">
     <div class="col-sm-8">
     <?php if($searchresult) { ?>
@@ -190,18 +190,18 @@
         <form action="FullPost.php?id=<?php echo $postid; ?>" method="post" enctype="multipart/form-data">
         <div class="form-group">
                         <label for="Name" class="form-name">Name</label>
-                        <input type="text" class="form-control" id="Name"  name="name">
+                        <input type="text" class="form-control" id="Name"  name="name" required>
                     </div>
                     <div class="form-group">
                         <label for="email" class="form-name">Email</label>
-                        <input type="email" class="form-control" id="email" placeholder="Email" name="email">
+                        <input type="email" class="form-control" id="email" placeholder="Email" name="email" required>
                         <small id="email" class="form-text text-muted">
                           Email Must be Valid
                         </small>
                     </div>
                     <div class="form-group">
                         <label for="comment" class="form-name">Comment</label>
-                        <textarea class="form-control" id="comment"  name="comment"></textarea>
+                        <textarea class="form-control" id="comment"  name="comment" required></textarea>
                     </div>
                     <button type="submit" class="btn btn-success btn-lg" name="submit">Comment</button>
                 </form>
@@ -209,17 +209,7 @@
 
     <!-- side of page -->
     <div class="offset-sm-1 col-sm-3">
-    <div class="card mb-5">
-    <div class="card-header font-weight-bold text-center">
-            About Me
-    </div>
-    <img src="./static/auntorphoto.png" class="card-img-top" alt="authorimage-image">
-    <div class="card-body">
-      This is some text within a card body.
-      This is some text within a card body.This is some text within a card body.
-      This is some text within a card body.This is some text within a card body.
-    </div>
-  </div>
+    
     <div class="card border-primary text-white text-center" style="width: 15rem;">
     <div class="card-header bg-primary font-weight-bold">
             Categories
@@ -244,13 +234,13 @@
 </div>
 
 
-<div class="card border-primary  mt-5" style="width: 20rem;">
-    <div class="card-header bg-primary font-weight-bold">
-            Latest Posts
-    </div>
-  <ul class="list-group list-group-flush">
-       <?php 
-       $sql = "SELECT * FROM blog ORDER BY datetime DESC limit 4";
+<div class="card border-primary  mt-5 mb-5" style="width: 20rem;">
+        <div class="card-header bg-primary font-weight-bold text-white text-center">
+            Most Viwed Posts
+          </div>
+          <ul class="list-group list-group-flush">
+            <?php 
+       $sql = "SELECT * FROM blog Where status = 1 ORDER BY views DESC limit 4";
        $res_data = $connection->query($sql);
            if($res_data->num_rows > 0) {
                while($row = $res_data->fetch_assoc()) {
@@ -260,31 +250,85 @@
                    $category = $row['category'];
                    $author = $row['author'];
                    $image = $row['image'];
+                   $status = $row['status'];
                     ?>
-            
+  <?php if($row['status']){ ?>
             <li class="list-group-item">
-            <div class="card" style="width: 18rem;">
-            <img src="<?= $image ?>" class="card-img-top" alt="post-image">
-            <div class="card-body">
-              <h5 class="card-title font-weight-bold"><?php echo $title; ?></h5>
-              <p class="card-text">
-                <?php if(strlen($post_body) > 65){
+              <div class="card" style="width: 18rem;">
+                <img src="<?= $image ?>" class="card-img-top" alt="post-image">
+                <div class="card-body">
+                  <h5 class="card-title font-weight-bold"><?php echo $title; ?></h5>
+                  <p class="card-text">
+                    <?php if(strlen($post_body) > 65){
                   $post_body = substr($post_body,0,65). "...";
                 }
                 echo $post_body;?>
-              </p>
-              <a href="FullPost.php?id=<?php echo $id; ?>" class="btn btn-primary">view More</a>
-            </div>
-          </div>
+                  </p>
+                  <a href="FullPost.php?id=<?php echo $id; ?>" class="btn btn-primary">view More</a>
+                </div>
+              </div>
             </li>
             <?php 
-                }} else {
-                echo "no Posts to show";
-            }
+                }}} else {
+               
+            
                    ?>
-        </ul>
-  </ul>
-</div>
+            <span class="text-center p-2 font-weight-bold">
+              No post to show
+            </span>
+            <?php } ?>
+          </ul>
+          </ul>
+        </div>
+
+
+        <div class="card border-primary  mt-5 mb-5" style="width: 20rem;">
+        <div class="card-header bg-primary font-weight-bold text-white text-center">
+            Latest Posts
+          </div>
+          <ul class="list-group list-group-flush">
+            <?php 
+       $sql = "SELECT * FROM blog Where status = 1 ORDER BY datetime DESC limit 4";
+       $res_data = $connection->query($sql);
+           if($res_data->num_rows > 0) {
+               while($row = $res_data->fetch_assoc()) {
+                   $id = $row['id'];
+                   $title = $row['title'];
+                   $post_body = $row['post_body'];
+                   $category = $row['category'];
+                   $author = $row['author'];
+                   $image = $row['image'];
+                   $status = $row['status'];
+                    ?>
+  <?php if($row['status']){ ?>
+            <li class="list-group-item">
+              <div class="card" style="width: 18rem;">
+                <img src="<?= $image ?>" class="card-img-top" alt="post-image">
+                <div class="card-body">
+                  <h5 class="card-title font-weight-bold"><?php echo $title; ?></h5>
+                  <p class="card-text">
+                    <?php if(strlen($post_body) > 65){
+                  $post_body = substr($post_body,0,65). "...";
+                }
+                echo $post_body;?>
+                  </p>
+                  <a href="FullPost.php?id=<?php echo $id; ?>" class="btn btn-primary">view More</a>
+                </div>
+              </div>
+            </li>
+            <?php 
+                }}} else {
+               
+            
+                   ?>
+            <span class="text-center p-2 font-weight-bold">
+              No post to show
+            </span>
+            <?php } ?>
+          </ul>
+          </ul>
+        </div>
+
     </div>
   </div>
 </div>
